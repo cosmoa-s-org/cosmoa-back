@@ -9,4 +9,8 @@ import java.util.List;
 public interface UserMapper {
 
     List<UserDTO> getUserList();
+    List<UserDTO> getUser1();
+    int signUp(UserDTO userDto);
+    int deleteUserByEmail(String email);
+    int updateUser(UserDTO userDto);
 }

@@ -14,4 +14,33 @@
                 AGE
         FROM USER
     </select>
+    <!-- 회원가입 -->
+    <insert id="signUp" parameterType="com.kumoh.cosmoa.dto.UserDTO" useGeneratedKeys="true"
+    keyProperty="id">
+    	INSERT INTO USER(
+     					EMAIL,
+     					PASSWORD,
+     					NICKNAME,
+     					TYPE,
+     					GENDER,
+     					AGE)
+     	VALUES(#{email}, #{password}, #{nickname}, #{type}, #{gender}, #{age})
+    </insert>
+    
+    <!-- 회원탈퇴 -->
+    <delete id="deleteUserByEmail" parameterType="String">
+    	DELETE FROM USER WHERE EMAIL = #{email}
+    </delete>
+    
+    <!-- 회원수정 -->
+    <update id="updateUser" parameterType="com.kumoh.cosmoa.dto.UserDTO">
+    	UPDATE USER SET EMAIL = #{email},
+    					PASSWORD = #{password},
+    					NICKNAME = #{nickname},
+    					TYPE = #{type},
+    					GENDER = #{gender},
+    					AGE = #{age}
+    				WHERE EMAIL = #{email}
+    </update>
+    
 </mapper>
