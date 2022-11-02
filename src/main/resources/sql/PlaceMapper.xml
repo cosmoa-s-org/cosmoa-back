@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kumoh.cosmoa.mapper.PlaceMapper">
+    <!--  3번째 : resultMap -->
+	<resultMap type="com.kumoh.cosmoa.dto.PlaceDTO" id="PlaceDTO">
+		<result property="id" column="ID" />
+        <result property="name" column="NAME" />
+        <result property="address" column="ADDRESS" />
+        <result property="imgPath" column="IMG_PATH" />
+        <result property="lat" column="LAT" />
+        <result property="lng" column="LNG" />
+        <result property="description" column="DESCRIPTION" />
+        <result property="createdDate" column="CREATED_DATE" />
+        <result property="modifiedDate" column="MODIFIED_DATE" />
+        <result property="userId" column="USER_ID" />
+	</resultMap>
+
+    <select id="getPlaceList" resultMap="PlaceDTO">
+        SELECT  ID,
+                USER_ID,
+                NAME,
+                ADDRESS,
+                LAT,
+                LNG,
+                IMG_PATH,
+                DESCRIPTION,
+                CREATED_DATE,
+                MODIFIED_DATE
+        FROM    PLACE
+    </select>
+
+    <select id="getPlace" resultMap="PlaceDTO">
+        SELECT  ID,
+                IMG_PATH
+        FROM    PLACE
+        WHERE ID=#{id}
+    </select>
+    <!--
+    <select id="getPlaceList" resultType="com.kumoh.cosmoa.dto.PlaceDTO">
+        SELECT  ID,
+        USER_ID,
+        NAME,
+        ADDRESS,
+        LAT,
+        LNG,
+        IMG_PATH,
+        DESCRIPTION,
+        CREATED_DATE,
+        MODIFIED_DATE
+        FROM    PLACE
+    </select> -->
+
+    <insert id="insertPlace">
+        INSERT INTO PLACE
+        (USER_ID, NAME, ADDRESS, LAT, LNG, DESCRIPTION, IMG_PATH, CREATED_DATE, MODIFIED_DATE)
+        VALUES (#{param.userId}, #{param.name}, #{param.address}, #{param.lat}, #{param.lng}, #{param.description}, #{param.imgPath}, NOW(), NOW())
+    </insert>
+
+    <update id="updatePlace">
+        UPDATE PLACE
+        SET NAME=#{param.name},
+            ADDRESS=#{param.address},
+            LAT=#{param.lat},
+            LNG=#{param.lng},
+            DESCRIPTION=#{param.description},
+            IMG_PATH=#{param.imgPath},
+            MODIFIED_DATE=NOW()
+        WHERE ID=#{param.id}
+    </update>
+
+    <delete id="deletePlace">
+        DELETE FROM PLACE
+        WHERE ID=#{param.id}
+    </delete>
+</mapper>
