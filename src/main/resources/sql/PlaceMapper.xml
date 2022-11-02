@@ -36,7 +36,7 @@
         SELECT  ID,
                 IMG_PATH
         FROM    PLACE
-        WHERE ID=#{id}
+        WHERE ID=#{placeId}
     </select>
     <!--
     <select id="getPlaceList" resultType="com.kumoh.cosmoa.dto.PlaceDTO">

@@ -21,12 +21,10 @@ public class PlaceService {
     }
 
     public PlaceResponseDTO insert(PlaceDTO dto, MultipartFile img) {
-        if (img != null) {
-            String path = FileUtils.saveImage(dto.getUserId(), img);
-            dto.setImgPath(path);
-        }
+        String path = FileUtils.saveImage("C:\\workspace\\images\\place", String.valueOf(dto.getUserId()), img);
+        dto.setImgPath(path);
 
-        if (placeMapper.insertPlace(dto) == 0) throw new RuntimeException("Insert failed. try again.");
+        if (placeMapper.insertPlace(dto) == 0) throw new RuntimeException("Insert Place failed. try again.");
 
         return null;
     }
@@ -36,20 +34,18 @@ public class PlaceService {
 
         if (img != null) {
             FileUtils.deleteImage(dto.getImgPath());
-            String path = FileUtils.saveImage(dto.getUserId(), img);
+            String path = FileUtils.saveImage("C:\\workspace\\images\\place", String.valueOf(dto.getUserId()), img);
             dto.setImgPath(path);
         }
 
-        if (placeMapper.updatePlace(dto) == 0) throw new RuntimeException("Update failed. try again.");
+        if (placeMapper.updatePlace(dto) == 0) throw new RuntimeException("Update Place failed. try again.");
 
         return null;
     }
 
     public boolean delete(int id) {
         PlaceDTO dto = placeMapper.getPlace(id);
-        if (dto.getImgPath() != null) {
-            FileUtils.deleteImage(dto.getImgPath());
-        }
+        FileUtils.deleteImage(dto.getImgPath());
 
         if (placeMapper.deletePlace(dto) == 0) throw new RuntimeException("Delete failed. try again.");
 

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kumoh.cosmoa.mapper.PlaceReplyMapper">
+    <!--  3번째 : resultMap -->
+    <resultMap type="com.kumoh.cosmoa.dto.PlaceReplyDTO" id="PlaceReplyDTO">
+        <result property="id" column="ID" />
+        <result property="placeId" column="PLACE_ID" />
+        <result property="userId" column="USER_ID" />
+        <result property="comment" column="COMMENT" />
+        <result property="imgPath" column="IMG_PATH" />
+        <result property="createdDate" column="CREATED_DATE" />
+        <result property="modifiedDate" column="MODIFIED_DATE" />
+    </resultMap>
+
+    <select id="findByPlaceId" resultMap="PlaceReplyDTO">
+        SELECT  ID,
+        PLACE_ID,
+        USER_ID,
+        COMMENT,
+        IMG_PATH,
+        CREATED_DATE,
+        MODIFIED_DATE
+        FROM    PLACE_REPLY
+    </select>
+
+    <select id="getPlaceReply" resultMap="PlaceReplyDTO">
+        SELECT  ID,
+        IMG_PATH
+        FROM    PLACE_REPLY
+        WHERE ID=#{replyId}
+    </select>
+    <!--
+    <select id="getPlaceList" resultType="com.kumoh.cosmoa.dto.PlaceDTO">
+        SELECT  ID,
+        USER_ID,
+        NAME,
+        ADDRESS,
+        LAT,
+        LNG,
+        IMG_PATH,
+        DESCRIPTION,
+        CREATED_DATE,
+        MODIFIED_DATE
+        FROM    PLACE
+    </select> -->
+
+    <insert id="insertPlaceReply">
+        INSERT INTO PLACE_REPLY
+        ( PLACE_ID, USER_ID, COMMENT, IMG_PATH, CREATED_DATE, MODIFIED_DATE )
+        VALUES ( #{param.placeId}, #{param.userId}, #{param.comment}, #{param.imgPath}, NOW(), NOW() )
+    </insert>
+
+    <update id="updatePlaceReply">
+        UPDATE PLACE_REPLY
+        SET COMMENT=#{param.comment},
+        IMG_PATH=#{param.imgPath},
+        MODIFIED_DATE=NOW()
+        WHERE ID=#{param.id}
+    </update>
+
+    <delete id="deletePlaceReply">
+        DELETE FROM PLACE_REPLY
+        WHERE ID=#{param.id}
+    </delete>
+</mapper>

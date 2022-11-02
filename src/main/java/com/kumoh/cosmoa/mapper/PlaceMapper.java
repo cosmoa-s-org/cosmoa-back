@@ -9,7 +9,7 @@ import java.util.List;
 @Mapper
 public interface PlaceMapper {
     List<PlaceDTO> getPlaceList();
-    PlaceDTO getPlace(@Param("id") int id);
+    PlaceDTO getPlace(@Param("placeId") int placeId);
 
     int insertPlace(@Param("param") PlaceDTO dto);
     int updatePlace(@Param("param") PlaceDTO dto);
