@@ -19,4 +19,16 @@ public class UserService {
     public List<UserDTO> findAll() {
         return userMapper.getUserList();
     }
+    
+    public int signUp(UserDTO userDto) {
+    	return userMapper.signUp(userDto);
+    }
+    
+    public int deleteUserByEmail(String email) {
+    	return userMapper.deleteUserByEmail(email);
+    }
+    
+    public int updateUser(UserDTO userDto) {
+    	return userMapper.updateUser(userDto);
+    }
 }
