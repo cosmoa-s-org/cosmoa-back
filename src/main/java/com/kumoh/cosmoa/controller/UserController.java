@@ -2,7 +2,6 @@ package com.kumoh.cosmoa.controller;
 
 import com.kumoh.cosmoa.dto.ResponseDTO;
 import com.kumoh.cosmoa.dto.UserDTO;
-import com.kumoh.cosmoa.form.UserCreateForm;
 import com.kumoh.cosmoa.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
