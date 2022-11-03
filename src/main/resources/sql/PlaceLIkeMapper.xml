@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kumoh.cosmoa.mapper.PlaceLikeMapper">
+    <!--  3번째 : resultMap -->
+    <resultMap type="com.kumoh.cosmoa.dto.PlaceLikeDTO" id="PlaceLikeDTO">
+        <result property="id" column="ID" />
+        <result property="placeId" column="PLACE_ID" />
+        <result property="userId" column="USER_ID" />
+    </resultMap>
+
+    <!-- 좋아요 수 얻기 -->
+    <select id="countByPlaceId" resultType="java.lang.Integer">
+        SELECT  count(*)
+        FROM    PLACE_LIKE
+        WHERE   PLACE_ID = #{placeId}
+    </select>
+
+    <!-- 접속 유저의 해당 장소에 대한 좋아요 여부 조회 -->
+    <select id="countByPlaceIdAndUserId" resultType="java.lang.Integer">
+        SELECT  count(*)
+        FROM    PLACE_LIKE
+        WHERE   PLACE_ID = #{param.placeId}
+        AND     USER_ID = #{param.userId}
+    </select>
+
+    <insert id="insertPlaceLike">
+        INSERT INTO PLACE_LIKE
+        ( PLACE_ID, USER_ID )
+        VALUES ( #{param.placeId}, #{param.userId} )
+    </insert>
+
+    <delete id="deletePlaceLike">
+        DELETE FROM PLACE_LIKE
+        WHERE ID=#{likeId}
+    </delete>
+</mapper>
