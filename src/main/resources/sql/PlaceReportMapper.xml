@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kumoh.cosmoa.mapper.PlaceReportMapper">
+    <resultMap type="com.kumoh.cosmoa.dto.PlaceDTO" id="PlaceDTO">
+        <result property="id" column="ID" />
+        <result property="name" column="NAME" />
+        <result property="address" column="ADDRESS" />
+        <result property="imgPath" column="IMG_PATH" />
+        <result property="lat" column="LAT" />
+        <result property="lng" column="LNG" />
+        <result property="description" column="DESCRIPTION" />
+        <result property="createdDate" column="CREATED_DATE" />
+        <result property="modifiedDate" column="MODIFIED_DATE" />
+        <result property="userId" column="USER_ID" />
+    </resultMap>
+
+    <resultMap type="com.kumoh.cosmoa.dto.UserDTO" id="UserDTO">
+        <result property="id" column="ID" />
+        <result property="email" column="EMAIL" />
+        <result property="password" column="PASSWORD" />
+        <result property="nickname" column="NICKNAME" />
+        <result property="type" column="TYPE" />
+        <result property="gender" column="GENDER" />
+        <result property="age" column="AGE" />
+    </resultMap>
+
+    <resultMap type="com.kumoh.cosmoa.dto.PlaceReportResponseDTO" id="PlaceReportResponseDTO">
+        <result property="id" column="ID" />
+        <result property="type" column="TYPE" />
+        <collection property="place" resultMap="PlaceDTO" />
+        <collection property="user" resultMap="UserDTO" />
+    </resultMap>
+
+
+    <select id="findAll" resultMap="PlaceReportResponseDTO">
+        SELECT  pr.ID, pr.TYPE,
+                p.NAME, p.DESCRIPTION,
+                u.EMAIL, u.NICKNAME
+        FROM    PLACE_REPORT pr, PLACE p, USER u
+        WHERE   pr.PLACE_ID = p.ID
+        AND     pr.USER_ID = u.ID
+    </select>
+
+    <insert id="insertPlaceReport">
+        INSERT INTO PLACE_REPORT
+        ( PLACE_ID, USER_ID, TYPE )
+        VALUES ( #{param.placeId}, #{param.userId}, #{param.type} )
+    </insert>
+
+    <delete id="deletePlaceReport">
+        DELETE FROM PLACE_REPORT
+        WHERE ID=#{reportId}
+    </delete>
+</mapper>
