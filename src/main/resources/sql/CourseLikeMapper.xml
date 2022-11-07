@@ -10,7 +10,7 @@
                 COURSE_ID
         FROM COURSE_Like
     </select>
-    <!-- 코스신고 -->
+    <!-- 코스좋아요 -->
     <insert id="createCourseLike" parameterType="com.kumoh.cosmoa.dto.CourseLikeDTO" useGeneratedKeys="true"
     keyProperty="id">
     	INSERT INTO COURSE_Like(
@@ -20,12 +20,12 @@
      	VALUES(#{id}, #{user_id}, #{course_id})
     </insert>
     
-    <!-- 코스신고취소 -->
+    <!-- 코스좋아요취소 -->
     <delete id="deleteCourseLike" parameterType="int">
     	DELETE FROM COURSE_REPLY WHERE ID = #{id}
     </delete>
     
-    <!-- 코스신고수정 -->
+    <!-- 코스좋아요수정 -->
     <update id="updateCourseLike" parameterType="com.kumoh.cosmoa.dto.CourseLikeDTO">
     	UPDATE COURSE_Like SET ID = #{id},
     					USER_ID = #{user_id},
