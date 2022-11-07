@@ -15,20 +15,21 @@ public class CourseLikeService {
     public CourseLikeService(CourseLikeMapper courseLikeMapper) {
         this.courseLikeMapper = courseLikeMapper;
     }
-
-    public List<CourseLikeDTO> findAll() {
-        return courseLikeMapper.getCourseLikeList();
+    
+    public int existsByCourseIdAndUserId(CourseLikeDTO dto) {
+    	return courseLikeMapper.existsByCourseIdAndUserId(dto);
     }
     
-    public int createCourseLike(CourseLikeDTO courseLikeDto) {
-    	return courseLikeMapper.createCourseLike(courseLikeDto);
+    public int countByCourseId(int courseId) {
+    	return courseLikeMapper.countByCourseId(courseId);
+    }
+    
+    public int createCourseLike(CourseLikeDTO dto) {
+    	return courseLikeMapper.createCourseLike(dto);
     }
     
     public int deleteCourseLike(int id) {
     	return courseLikeMapper.deleteCourseLike(id);
     }
     
-    public int updateCourseLike(CourseLikeDTO courseLikeDto) {
-    	return courseLikeMapper.updateCourseLike(courseLikeDto);
-    }
 }

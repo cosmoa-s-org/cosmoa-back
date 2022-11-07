@@ -1,6 +1,7 @@
 package com.kumoh.cosmoa.controller;
 
 import com.kumoh.cosmoa.dto.CourseLikeDTO;
+import com.kumoh.cosmoa.dto.PlaceLikeDTO;
 import com.kumoh.cosmoa.dto.ResponseDTO;
 import com.kumoh.cosmoa.service.CourseLikeService;
 import lombok.extern.slf4j.Slf4j;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -24,34 +26,51 @@ public class CourseLikeController {
     public CourseLikeController(CourseLikeService courseLikeService) {
         this.courseLikeService = courseLikeService;
     }
-
+    
+    //좋아요 갯수 조회
+    @GetMapping("/count")
+    public ResponseEntity<?> countByCourseId(@RequestParam int Id) {
+        try {
+            int count = courseLikeService.countByCourseId(Id);
+            return ResponseEntity.ok().body(ResponseDTO.builder().data(count).build());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+    
+ // 접속 유저의 해당 장소에 대한 좋아요 여부 조회
     @GetMapping("")
-    public ResponseEntity<?> getCourseLikeList() {
-        List<CourseLikeDTO> dtos = courseLikeService.findAll();
-        ResponseDTO<List<CourseLikeDTO>> response = ResponseDTO.<List<CourseLikeDTO>>builder().data(dtos).build();
-
-        return ResponseEntity.ok().body(response);
+    public ResponseEntity<?> existsByCourseIdAndUserId(@RequestParam int courseId,
+                                                    @RequestParam int userId) {
+        try {
+            CourseLikeDTO dto = CourseLikeDTO.builder().course_id(courseId).user_id(userId).build();
+            int isLike = courseLikeService.existsByCourseIdAndUserId(dto);
+            return ResponseEntity.ok().body(ResponseDTO.builder().data(isLike).build());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
     
+    //좋아요 누르기
     @PostMapping("")
-    public ResponseEntity<?> createCourseLike(CourseLikeDTO courseLikeDto) throws Exception{
-    	int result = courseLikeService.createCourseLike(courseLikeDto);
+    public ResponseEntity<?> createCourseLike(CourseLikeDTO courseLikeDto) {
+    	try {
+    		int result = courseLikeService.createCourseLike(courseLikeDto);
+            return ResponseEntity.ok().body(result);
+            
+    	} catch (Exception e) {
     	
-    	return ResponseEntity.ok().body(result);
+    		return ResponseEntity.badRequest().body(e.getMessage());
+    	}
     }
     
-    @PutMapping("/{id}")
-    public ResponseEntity<?> updateCourseLike(@PathVariable int id, CourseLikeDTO courseLikeDto) throws Exception{
-    	courseLikeDto.setId(id);
-    	int result = courseLikeService.updateCourseLike(courseLikeDto);
-    	
-    	return ResponseEntity.ok().body(result);
-    }
-    
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteCourse(@PathVariable int id) throws Exception{
-    	int result = courseLikeService.deleteCourseLike(id);
-    	
-    	return ResponseEntity.ok().body(result);
+    @DeleteMapping("/{likeId}")
+    public ResponseEntity<?> deleteCourse(@PathVariable int likeId) {
+    	try {
+    		int result = courseLikeService.deleteCourseLike(likeId);
+    		return ResponseEntity.ok().body(result);    		
+    	} catch (Exception e) {
+    		return ResponseEntity.badRequest().body(e.getMessage());
+    	}
     }
 }
