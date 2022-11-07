@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kumoh.cosmoa.mapper.CourseLikeMapper">
+    <select id="getCourseLikeList" resultType="com.kumoh.cosmoa.dto.CourseLikeDTO">
+        SELECT  ID,
+                USER_ID,
+                COURSE_ID
+        FROM COURSE_Like
+    </select>
+    <!-- 코스신고 -->
+    <insert id="createCourseLike" parameterType="com.kumoh.cosmoa.dto.CourseLikeDTO" useGeneratedKeys="true"
+    keyProperty="id">
+    	INSERT INTO COURSE_Like(
+     					ID,
+                		USER_ID,
+                		COURSE_ID
+     	VALUES(#{id}, #{user_id}, #{course_id})
+    </insert>
+    
+    <!-- 코스신고취소 -->
+    <delete id="deleteCourseLike" parameterType="int">
+    	DELETE FROM COURSE_REPLY WHERE ID = #{id}
+    </delete>
+    
+    <!-- 코스신고수정 -->
+    <update id="updateCourseLike" parameterType="com.kumoh.cosmoa.dto.CourseLikeDTO">
+    	UPDATE COURSE_Like SET ID = #{id},
+    					USER_ID = #{user_id},
+    					COURSE_ID = #{course_id}
+    				WHERE ID = #{id}
+    </update>
+    
+</mapper>
