@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kumoh.cosmoa.mapper.CourseComposeMapper">
+    <!--
+    <resultMap type="com.kumoh.cosmoa.dto.CourseDTO" id="CourseDTO">
+        <result property="id" column="ID" />
+        <result property="name" column="NAME" />
+        <result property="description" column="DESCRIPTION" />
+        <result property="createdDate" column="CREATED_DATE" />
+        <result property="modifiedDate" column="MODIFIED_DATE" />
+        <result property="userId" column="USER_ID" />
+    </resultMap> -->
+
+    <resultMap type="com.kumoh.cosmoa.dto.PlaceDTO" id="PlaceDTO">
+        <result property="id" column="ID" />
+        <result property="name" column="NAME" />
+        <result property="address" column="ADDRESS" />
+        <result property="imgPath" column="IMG_PATH" />
+        <result property="lat" column="LAT" />
+        <result property="lng" column="LNG" />
+        <result property="description" column="DESCRIPTION" />
+        <result property="createdDate" column="CREATED_DATE" />
+        <result property="modifiedDate" column="MODIFIED_DATE" />
+        <result property="userId" column="USER_ID" />
+    </resultMap>
+
+    <resultMap type="com.kumoh.cosmoa.dto.ComposeResponseDTO" id="ComposeResponseDTO">
+        <result property="id" column="ID" />
+        <result property="sequence" column="SEQUENCE" />
+        <result property="costTime" column="COST_TIME" />
+        <collection property="place" resultMap="PlaceDTO" />
+    </resultMap>
+
+    <select id="findByCourseId" resultMap="ComposeResponseDTO">
+        SELECT  c.SEQUENCE, c.COST_TIME,
+                p.ID, p.NAME, p.DESCRIPTION, p.ADDRESS, p.IMG_PATH, p.LAT, p.LNG,
+                p.CREATED_DATE, p.MODIFIED_DATE, p.USER_ID
+        FROM    COMPOSE c, PLACE p
+        WHERE   c.PLACE_ID = p.ID
+        AND     c.COURSE_ID = #{courseId}
+    </select>
+
+    <!-- 코스구성생성 -->
+    <insert id="insertCompose" parameterType="com.kumoh.cosmoa.dto.ComposeDTO"
+            useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO COMPOSE
+        ( COURSE_ID, PLACE_ID, COST_TIME, SEQUENCE )
+        VALUES ( #{param.courseId}, #{param.placeId}, #{param.costTime}, #{param.sequence} )
+    </insert>
+
+    <update id="updateCompose" parameterType="com.kumoh.cosmoa.dto.ComposeDTO">
+        UPDATE COMPOSE
+        SET COST_TIME = #{param.costTime},
+            SEQUENCE = #{param.sequence}
+        WHERE ID = #{param.id}
+    </update>
+
+    <delete id="deleteCompose">
+        DELETE FROM COMPOSE
+        WHERE ID = #{composeId}
+    </delete>
+
+    <!-- 코스댓글삭제
+    <delete id="deleteCourseReply" parameterType="int">
+        DELETE FROM COURSE_REPLY WHERE ID = #{id}
+    </delete> -->
+
+    <!-- 코스댓글수정
+    <update id="updateCourseReply" parameterType="com.kumoh.cosmoa.dto.CourseReplyDTO">
+        UPDATE COURSE SET ID = #{id},
+        USER_ID = #{user_id},
+        COURSE_ID = #{course_id},
+        COMMENT = #{comment},
+        CREATED_DATE = #{created_date},
+        MODIFIED_DATE = #{modified_date}
+        WHERE ID = #{id}
+    </update> -->
+
+</mapper>
