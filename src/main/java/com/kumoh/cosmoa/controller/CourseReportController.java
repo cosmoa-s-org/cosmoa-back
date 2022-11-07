@@ -49,7 +49,7 @@ public class CourseReportController {
     }
     
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteCourse(@PathVariable int id) throws Exception{
+    public ResponseEntity<?> deleteCourseReport(@PathVariable int id) throws Exception{
     	int result = courseReportService.deleteCourseReport(id);
     	
     	return ResponseEntity.ok().body(result);
