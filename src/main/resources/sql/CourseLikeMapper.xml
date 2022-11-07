@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kumoh.cosmoa.mapper.CourseLikeMapper">
+    <select id="countByCourseIdAndUserId" resultType="com.kumoh.cosmoa.dto.CourseLikeDTO">
+        SELECT  count(*)
+        FROM COURSE_LIKE
+        WHERE COURSE_ID = #{param.courseId}
+        AND USER_ID = #{param.userId}
+    </select>
+    
+    <!-- 코스 좋아요 수 얻기 -->
+    <select id="countByCourseId" resultType="java.lang.Integer">
+        SELECT  count(*)
+        FROM    COURSE_LIKE
+        WHERE   COURSE_ID = #{param.Id}
+    </select>
+    
+    <!-- 코스좋아요 -->
+    <insert id="createCourseLike" parameterType="com.kumoh.cosmoa.dto.CourseLikeDTO" useGeneratedKeys="true"
+    keyProperty="id">
+    	INSERT INTO COURSE_Like(
+     					ID,
+                		USER_ID,
+                		COURSE_ID
+     	VALUES(#{id}, #{user_id}, #{course_id})
+    </insert>
+    
+    <!-- 코스좋아요취소 -->
+    <delete id="deleteCourseLike" parameterType="int">
+    	DELETE FROM COURSE_REPLY WHERE ID = #{id}
+    </delete>
+    
+</mapper>
