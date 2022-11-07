@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kumoh.cosmoa.mapper.CourseReportMapper">
+    <select id="getCourseReportList" resultType="com.kumoh.cosmoa.dto.CourseReportDTO">
+        SELECT  ID,
+                USER_ID,
+                COURSE_ID,
+                TYPE
+        FROM COURSE_REPORT
+    </select>
+    <!-- 코스신고 -->
+    <insert id="createCourseReport" parameterType="com.kumoh.cosmoa.dto.CourseReportDTO" useGeneratedKeys="true"
+    keyProperty="id">
+    	INSERT INTO COURSE_REPORT(
+     					ID,
+                		USER_ID,
+                		COURSE_ID,
+                		TYPE
+     	VALUES(#{id}, #{user_id}, #{course_id}, #{type})
+    </insert>
+    
+    <!-- 코스신고취소 -->
+    <delete id="deleteCourseReport" parameterType="int">
+    	DELETE FROM COURSE_REPLY WHERE ID = #{id}
+    </delete>
+    
+    <!-- 코스신고수정 -->
+    <update id="updateCourseReport" parameterType="com.kumoh.cosmoa.dto.CourseReportDTO">
+    	UPDATE COURSE_REPORT SET ID = #{id},
+    					USER_ID = #{user_id},
+    					COURSE_ID = #{course_id},
+    					TYPE = #{type}
+    				WHERE ID = #{id}
+    </update>
+    
+</mapper>
