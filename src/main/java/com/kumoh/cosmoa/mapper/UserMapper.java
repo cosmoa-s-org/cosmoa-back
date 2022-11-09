@@ -12,4 +12,5 @@ public interface UserMapper {
     int signUp(UserDTO userDto);
     int deleteUserByEmail(String email);
     int updateUser(UserDTO userDto);
+    UserDTO findUserByEmail(String email);
 }

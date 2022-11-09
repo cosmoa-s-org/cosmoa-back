@@ -43,4 +43,17 @@
     				WHERE EMAIL = #{email}
     </update>
     
+    <!--  회원정보 이메일로 찾기 -->
+    <select id="findUserByEmail" parameterType="String" resultType="com.kumoh.cosmoa.dto.UserDTO">
+	SELECT ID,
+	EMAIL,
+	PASSWORD,
+	NICKNAME,
+	TYPE,
+	GENDER,
+	AGE
+	FROM USER
+	WHERE EMAIL = #{email}
+    </select>
+    
 </mapper>
