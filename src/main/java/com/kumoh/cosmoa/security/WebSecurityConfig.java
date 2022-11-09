@@ -28,10 +28,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                 .antMatchers("/admin").hasRole("USER") // USER, ADMIN만 접근 가능
                 .antMatchers("/admin").hasRole("ADMIN")
                 .and()
-            .formLogin()
-                .loginPage("/user/login")
-                .defaultSuccessUrl("/")
-                .and()
+//            .formLogin()
+//                .loginPage("/user/login")
+//                .defaultSuccessUrl("/")
+//                .and()
             .logout()
                 .logoutSuccessUrl("/")
                 .invalidateHttpSession(true);

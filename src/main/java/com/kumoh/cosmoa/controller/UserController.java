@@ -9,13 +9,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -42,7 +36,7 @@ public class UserController {
     }
     
     @PostMapping("")
-    public ResponseEntity<?> signUp(UserDTO userDto) {    	
+    public ResponseEntity<?> signUp(@RequestBody UserDTO userDto) {
     	try {
     		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
     		userDto.setPassword(encoder.encode(userDto.getPassword()));
@@ -96,14 +90,16 @@ public class UserController {
     	}
     }
     
-    @GetMapping("/login")
-    public ResponseEntity<?> login(@RequestParam(value = "email") String email, @RequestParam(value = "password") String password){
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody UserDTO dto){
+		log.info("user dto : {}", dto != null);
     	try {
+
     		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-    		UserDTO originalUser = userService.findUserByEmail(email);
-    		if(encoder.matches(password, originalUser.getPassword()))
+    		UserDTO originalUser = userService.findUserByEmail(dto.getEmail());
+    		if(encoder.matches(dto.getPassword(), originalUser.getPassword()))
     		{
-    			return ResponseEntity.ok().body(originalUser);    		    			
+    			return ResponseEntity.ok().body(ResponseDTO.builder().data(originalUser).build());
     		}
     		else return ResponseEntity.ok().body("비밀번호 불일치");
     		
