@@ -5,6 +5,7 @@ import com.kumoh.cosmoa.dto.PlaceReplyResponseDTO;
 import com.kumoh.cosmoa.dto.ResponseDTO;
 import com.kumoh.cosmoa.service.PlaceReplyService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -22,15 +23,20 @@ public class PlaceReplyController {
         this.placeReplyService = placeReplyService;
     }
 
-    @PostMapping("")
-    public ResponseEntity<?> create(PlaceReplyDTO dto,
-                                    MultipartFile img) {
+    @PostMapping(value = "", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<?> create(@RequestParam("userId") int userId,
+                                    @RequestParam("comment") String comment,
+                                    @RequestParam(value = "img", required = false) MultipartFile img) {
         try {
+            PlaceReplyDTO dto = PlaceReplyDTO.builder()
+                    .userId(userId)
+                    .comment(comment)
+                    .build();
             PlaceReplyDTO saved = placeReplyService.insert(dto, img);
             ResponseDTO<PlaceReplyDTO> response = ResponseDTO.<PlaceReplyDTO>builder().data(saved).build();
             return ResponseEntity.ok().body(response);
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+            return ResponseEntity.badRequest().body(ResponseDTO.builder().error(e.getMessage()).build());
         }
     }
 
@@ -43,23 +49,27 @@ public class PlaceReplyController {
 
             return ResponseEntity.ok().body(response);
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+            return ResponseEntity.badRequest().body(ResponseDTO.builder().error(e.getMessage()).build());
         }
     }
 
-    @PutMapping("/{replyId}")
+    @PutMapping(value = "/{replyId}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<?> update(@PathVariable int replyId,
-                                    PlaceReplyDTO dto,
-                                    MultipartFile img) {
+                                    @RequestParam("userId") int userId,
+                                    @RequestParam("comment") String comment,
+                                    @RequestParam(value = "img", required = false) MultipartFile img) {
         try {
-            log.info("dto exists : {}", dto != null);
-            dto.setId(replyId);
+            PlaceReplyDTO dto = PlaceReplyDTO.builder()
+                    .id(replyId)
+                    .userId(userId)
+                    .comment(comment)
+                    .build();
             PlaceReplyDTO updated = placeReplyService.update(dto, img);
             ResponseDTO<PlaceReplyDTO> response = ResponseDTO.<PlaceReplyDTO>builder().data(updated).build();
 
             return ResponseEntity.ok().body(response);
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+            return ResponseEntity.badRequest().body(ResponseDTO.builder().error(e.getMessage()).build());
         }
     }
 
@@ -70,7 +80,7 @@ public class PlaceReplyController {
 
             return ResponseEntity.ok().body("delete done.");
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+            return ResponseEntity.badRequest().body(ResponseDTO.builder().error(e.getMessage()).build());
         }
     }
 }

@@ -5,6 +5,7 @@ import com.kumoh.cosmoa.dto.PlaceResponseDTO;
 import com.kumoh.cosmoa.dto.ResponseDTO;
 import com.kumoh.cosmoa.service.PlaceService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -22,10 +23,24 @@ public class PlaceController {
         this.placeService = placeService;
     }
 
-    @PostMapping("")
-    public ResponseEntity<?> create(PlaceDTO dto,
-                                    MultipartFile img) {
+    @PostMapping(value = "", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<?> create(@RequestParam("name") String name,
+                                    @RequestParam("description") String description,
+                                    @RequestParam("address") String address,
+                                    @RequestParam("lat") String lat,
+                                    @RequestParam("lng") String lng,
+                                    @RequestParam("userId") int userId,
+                                    @RequestParam(value = "img", required = false) MultipartFile img) {
         try {
+            log.info("img : {}", img != null);
+            PlaceDTO dto = PlaceDTO.builder()
+                    .name(name)
+                    .description(description)
+                    .address(address)
+                    .lat(lat)
+                    .lng(lng)
+                    .userId(userId)
+                    .build();
             placeService.insert(dto, img);
             return ResponseEntity.ok().body(dto);
         } catch (Exception e) {
@@ -33,13 +48,26 @@ public class PlaceController {
         }
     }
 
-    @PutMapping("/{id}")
+    @PutMapping(value = "/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<?> update(@PathVariable int id,
-                                    PlaceDTO dto,
-                                    MultipartFile img) {
+                                    @RequestParam("name") String name,
+                                    @RequestParam("description") String description,
+                                    @RequestParam("address") String address,
+                                    @RequestParam("lat") String lat,
+                                    @RequestParam("lng") String lng,
+                                    @RequestParam("userId") int userId,
+                                    @RequestParam(value = "img", required = false) MultipartFile img) {
         log.info("img: {}", img != null);
         try {
-            dto.setId(id);
+            PlaceDTO dto = PlaceDTO.builder()
+                    .id(id)
+                    .name(name)
+                    .description(description)
+                    .address(address)
+                    .lat(lat)
+                    .lng(lng)
+                    .userId(userId)
+                    .build();
             placeService.update(dto, img);
             return ResponseEntity.ok().body(dto);
         } catch (Exception e) {
