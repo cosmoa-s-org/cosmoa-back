@@ -46,6 +46,7 @@ public class PlaceResponseDTO {
         this.modifiedDate = dto.getModifiedDate();
 
         try {
+            if (dto.getImgPath() == null) return;
             Path path = Paths.get(dto.getImgPath());
             byte[] bytes = Files.readAllBytes(path);
 //            File file = new File(dto.getImgPath());
