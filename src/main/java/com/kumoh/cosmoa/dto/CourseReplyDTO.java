@@ -16,6 +16,6 @@ public class CourseReplyDTO {
     private int user_id;
     private int course_id;
     private String comment;
-    private Date created_date;
-    private Date modified_date;
+    private String created_date;
+    private String modified_date;
 }

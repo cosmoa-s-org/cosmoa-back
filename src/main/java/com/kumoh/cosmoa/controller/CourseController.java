@@ -6,12 +6,7 @@ import com.kumoh.cosmoa.service.CourseService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 
 import java.sql.Date;
@@ -36,14 +31,14 @@ public class CourseController {
     }
     
     @PostMapping("")
-    public ResponseEntity<?> createCourse(CourseDTO courseDto) throws Exception{
+    public ResponseEntity<?> createCourse(@RequestBody CourseDTO courseDto) throws Exception{
     	int result = courseService.createCourse(courseDto);
     	
     	return ResponseEntity.ok().body(result);
     }
     
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateCourse(@PathVariable int id, CourseDTO courseDto) throws Exception{
+    public ResponseEntity<?> updateCourse(@PathVariable int id, @RequestBody CourseDTO courseDto) throws Exception{
     	long millis = System.currentTimeMillis();
     	courseDto.setId(id);
     	courseDto.setModified_date(new Date(millis));

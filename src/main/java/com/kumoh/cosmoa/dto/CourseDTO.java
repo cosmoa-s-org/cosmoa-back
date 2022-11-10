@@ -15,7 +15,7 @@ public class CourseDTO {
     private int id;
     private String name;
     private String description;
-    private Date created_date;
-    private Date modified_date;
-    private int user_id;
+    private String created_date;
+    private String modified_date;
+    private int userId;
 }

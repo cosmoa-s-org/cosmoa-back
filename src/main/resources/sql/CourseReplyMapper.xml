@@ -23,7 +23,7 @@
                 		COMMENT,
                 		CREATED_DATE,
                 		MODIFIED_DATE)
-     	VALUES(#{id}, #{user_id}, #{course_id}, #{comment}, #{created_date}, #{modified_date})
+     	VALUES(#{id}, #{user_id}, #{course_id}, #{comment}, NOW(), NOW())
     </insert>
     
     <!-- 코스댓글삭제 -->
@@ -37,8 +37,7 @@
     					USER_ID = #{user_id},
     					COURSE_ID = #{course_id},
     					COMMENT = #{comment},
-    					CREATED_DATE = #{created_date},
-    					MODIFIED_DATE = #{modified_date}
+    					MODIFIED_DATE = NOW()
     				WHERE ID = #{id}
     </update>
     

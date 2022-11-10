@@ -23,7 +23,7 @@
                 		CREATED_DATE,
                 		MODIFIED_DATE,
                 		USER_ID)
-     	VALUES(#{id}, #{name}, #{description}, #{created_date}, #{modified_date}, #{user_id})
+     	VALUES(#{id}, #{name}, #{description}, NOW(), NOW(), #{userId})
     </insert>
     
     <!-- 코스삭제 -->
@@ -36,8 +36,7 @@
     	UPDATE COURSE SET ID = #{id},
     					NAME = #{name},
     					DESCRIPTION = #{description},
-    					CREATED_DATE = #{created_date},
-    					MODIFIED_DATE = #{modified_date}
+    					MODIFIED_DATE = NOW()
     				WHERE ID = #{id}
     </update>
     
