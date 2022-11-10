@@ -44,7 +44,7 @@ public class PlaceController {
             placeService.insert(dto, img);
             return ResponseEntity.ok().body(dto);
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+            return ResponseEntity.badRequest().body(ResponseDTO.builder().error(e.getMessage()).build());
         }
     }
 
@@ -71,7 +71,7 @@ public class PlaceController {
             placeService.update(dto, img);
             return ResponseEntity.ok().body(dto);
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+            return ResponseEntity.badRequest().body(ResponseDTO.builder().error(e.getMessage()).build());
         }
     }
 
@@ -82,20 +82,27 @@ public class PlaceController {
             placeService.delete(id);
             return ResponseEntity.ok().body(id);
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+            return ResponseEntity.badRequest().body(ResponseDTO.builder().error(e.getMessage()).build());
         }
     }
 
-    // 전체 목록 조회, 검색 구현 필요
     @GetMapping("")
-    public ResponseEntity<?> read() {
-        List<PlaceResponseDTO> dtos = placeService.findAll();
-        ResponseDTO<List<PlaceResponseDTO>> response =
-                ResponseDTO.<List<PlaceResponseDTO>>builder()
-                        .data(dtos)
-                        .build();
+    public ResponseEntity<?> searchByNameAndAddress(@RequestParam("search") String search) {
+        /*
+         * GET http://localhost:8080/place?search="구미시"
+         */
 
-        return ResponseEntity.ok().body(response);
+        try {
+            List<PlaceResponseDTO> dtos = placeService.findByNameAndAddress(search);
+            ResponseDTO<List<PlaceResponseDTO>> response =
+                    ResponseDTO.<List<PlaceResponseDTO>>builder()
+                            .data(dtos)
+                            .build();
+
+            return ResponseEntity.ok().body(response);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(ResponseDTO.builder().error(e.getMessage()).build());
+        }
     }
 
     @GetMapping(value = "/download", produces = "image/png")

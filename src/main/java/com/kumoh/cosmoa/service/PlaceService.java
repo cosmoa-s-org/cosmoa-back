@@ -60,4 +60,10 @@ public class PlaceService {
 
         return dtos.stream().map(PlaceResponseDTO::new).collect(Collectors.toList());
     }
+
+    public List<PlaceResponseDTO> findByNameAndAddress(String search) {
+        List<PlaceDTO> dtos = placeMapper.findByNameAndAddress(search);
+
+        return dtos.stream().map(PlaceResponseDTO::new).collect(Collectors.toList());
+    }
 }

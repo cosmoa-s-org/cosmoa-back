@@ -32,6 +32,22 @@
         FROM    PLACE
     </select>
 
+    <select id="findByNameAndAddress" resultMap="PlaceDTO">
+        SELECT  ID,
+        USER_ID,
+        NAME,
+        ADDRESS,
+        LAT,
+        LNG
+<!--        IMG_PATH,-->
+<!--        DESCRIPTION,-->
+<!--        CREATED_DATE,-->
+<!--        MODIFIED_DATE-->
+        FROM    PLACE
+        WHERE   NAME LIKE CONCAT('%', #{search}, '%')
+        OR      ADDRESS LIKE CONCAT('%', #{search}, '%')
+    </select>
+
     <select id="getPlace" resultMap="PlaceDTO">
         SELECT  ID,
                 IMG_PATH
