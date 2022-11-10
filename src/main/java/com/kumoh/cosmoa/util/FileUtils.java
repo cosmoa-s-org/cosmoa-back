@@ -20,7 +20,7 @@ public class FileUtils {
             File imageDirectory = new File(dir);
             // 디렉토리가 존재하지 않는다면 새로 만들기
             if (!imageDirectory.exists()) {
-                imageDirectory.mkdir();
+                imageDirectory.mkdirs();
                 log.info("mkdir {}", imageDirectory.getAbsolutePath());
             }
 
