@@ -14,7 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 @Controller
-@RequestMapping("/place_reply")
+@RequestMapping("/place-reply")
 @Slf4j
 public class PlaceReplyController {
     private final PlaceReplyService placeReplyService;
@@ -24,11 +24,13 @@ public class PlaceReplyController {
     }
 
     @PostMapping(value = "", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<?> create(@RequestParam("userId") int userId,
+    public ResponseEntity<?> create(@RequestParam("placeId") int placeId,
+                                    @RequestParam("userId") int userId,
                                     @RequestParam("comment") String comment,
                                     @RequestParam(value = "img", required = false) MultipartFile img) {
         try {
             PlaceReplyDTO dto = PlaceReplyDTO.builder()
+                    .placeId(placeId)
                     .userId(userId)
                     .comment(comment)
                     .build();
@@ -55,12 +57,14 @@ public class PlaceReplyController {
 
     @PutMapping(value = "/{replyId}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<?> update(@PathVariable int replyId,
+                                    @RequestParam("placeId") int placeId,
                                     @RequestParam("userId") int userId,
                                     @RequestParam("comment") String comment,
                                     @RequestParam(value = "img", required = false) MultipartFile img) {
         try {
             PlaceReplyDTO dto = PlaceReplyDTO.builder()
                     .id(replyId)
+                    .placeId(placeId)
                     .userId(userId)
                     .comment(comment)
                     .build();
@@ -78,7 +82,7 @@ public class PlaceReplyController {
         try {
             placeReplyService.delete(replyId);
 
-            return ResponseEntity.ok().body("delete done.");
+            return ResponseEntity.ok().body(ResponseDTO.builder().data("Delete place reply done.").build());
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(ResponseDTO.builder().error(e.getMessage()).build());
         }

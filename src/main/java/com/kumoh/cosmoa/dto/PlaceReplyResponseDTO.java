@@ -33,6 +33,7 @@ public class PlaceReplyResponseDTO {
         this.modifiedDate = dto.getModifiedDate();
 
         try {
+            if (dto.getImgPath() == null) return;
             Path path = Paths.get(dto.getImgPath());
             this.img = Files.readAllBytes(path);
         } catch (Exception e) {

@@ -26,7 +26,7 @@ public class PlaceReportController {
             ResponseDTO<PlaceReportDTO> response = ResponseDTO.<PlaceReportDTO>builder().data(saved).build();
             return ResponseEntity.ok().body(response);
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+            return ResponseEntity.badRequest().body(ResponseDTO.builder().error(e.getMessage()).build());
         }
     }
 
@@ -38,7 +38,7 @@ public class PlaceReportController {
                     ResponseDTO.<List<PlaceReportResponseDTO>>builder().data(dtos).build();
             return ResponseEntity.ok().body(response);
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+            return ResponseEntity.badRequest().body(ResponseDTO.builder().error(e.getMessage()).build());
         }
     }
 
@@ -51,7 +51,7 @@ public class PlaceReportController {
             ResponseDTO<Object> response = ResponseDTO.builder().data(isDelete).build();
             return ResponseEntity.ok().body(response);
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+            return ResponseEntity.badRequest().body(ResponseDTO.builder().error(e.getMessage()).build());
         }
     }
 }

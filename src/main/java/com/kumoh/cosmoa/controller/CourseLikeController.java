@@ -34,7 +34,7 @@ public class CourseLikeController {
             int count = courseLikeService.countByCourseId(Id);
             return ResponseEntity.ok().body(ResponseDTO.builder().data(count).build());
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+            return ResponseEntity.badRequest().body(ResponseDTO.builder().error(e.getMessage()).build());
         }
     }
     
@@ -47,30 +47,28 @@ public class CourseLikeController {
             int isLike = courseLikeService.existsByCourseIdAndUserId(dto);
             return ResponseEntity.ok().body(ResponseDTO.builder().data(isLike).build());
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+            return ResponseEntity.badRequest().body(ResponseDTO.builder().error(e.getMessage()).build());
         }
     }
     
     //좋아요 누르기
     @PostMapping("")
     public ResponseEntity<?> createCourseLike(CourseLikeDTO courseLikeDto) {
-    	try {
-    		int result = courseLikeService.createCourseLike(courseLikeDto);
-            return ResponseEntity.ok().body(result);
-            
-    	} catch (Exception e) {
-    	
-    		return ResponseEntity.badRequest().body(e.getMessage());
-    	}
+        try {
+            int result = courseLikeService.createCourseLike(courseLikeDto);
+            return ResponseEntity.ok().body(ResponseDTO.builder().data("Like done.").build());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(ResponseDTO.builder().error(e.getMessage()).build());
+        }
     }
     
     @DeleteMapping("/{likeId}")
     public ResponseEntity<?> deleteCourse(@PathVariable int likeId) {
-    	try {
-    		int result = courseLikeService.deleteCourseLike(likeId);
-    		return ResponseEntity.ok().body(result);    		
-    	} catch (Exception e) {
-    		return ResponseEntity.badRequest().body(e.getMessage());
-    	}
+        try {
+            int result = courseLikeService.deleteCourseLike(likeId);
+            return ResponseEntity.ok().body(ResponseDTO.builder().data("Delete course done.").build());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(ResponseDTO.builder().error(e.getMessage()).build());
+        }
     }
 }

@@ -35,33 +35,52 @@ public class CourseReplyController {
 
     @GetMapping("")
     public ResponseEntity<?> getCourseReplyList() {
-        List<CourseReplyDTO> dtos = courseReplyService.findAll();
-        ResponseDTO<List<CourseReplyDTO>> response = ResponseDTO.<List<CourseReplyDTO>>builder().data(dtos).build();
+        try {
+            List<CourseReplyDTO> dtos = courseReplyService.findAll();
+            ResponseDTO<List<CourseReplyDTO>> response = ResponseDTO.<List<CourseReplyDTO>>builder().data(dtos).build();
 
-        return ResponseEntity.ok().body(response);
+            return ResponseEntity.ok().body(response);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(ResponseDTO.builder().error(e.getMessage()).build());
+        }
     }
     
     @PostMapping("")
-    public ResponseEntity<?> createReplyCourse(CourseReplyDTO courseReplyDto) throws Exception{
-    	int result = courseReplyService.createCourseReply(courseReplyDto);
-    	
-    	return ResponseEntity.ok().body(result);
+    public ResponseEntity<?> createReplyCourse(CourseReplyDTO courseReplyDto) {
+        try {
+            int result = courseReplyService.createCourseReply(courseReplyDto);
+
+            return ResponseEntity.ok().body(ResponseDTO.builder().data("Create course reply done!").build());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(ResponseDTO.builder().error(e.getMessage()).build());
+        }
+
     }
     
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateCourseReply(@PathVariable int id, CourseReplyDTO courseReplyDto) throws Exception{
-    	long millis = System.currentTimeMillis();
-    	courseReplyDto.setId(id);
-    	courseReplyDto.setModified_date(new Date(millis));
-    	int result = courseReplyService.updateCourseReply(courseReplyDto);
-    	
-    	return ResponseEntity.ok().body(result);
+    public ResponseEntity<?> updateCourseReply(@PathVariable int id, CourseReplyDTO courseReplyDto) {
+        try {
+            //    	long millis = System.currentTimeMillis();
+            //      courseReplyDto.setModified_date(new Date(millis));
+            courseReplyDto.setId(id);
+            int result = courseReplyService.updateCourseReply(courseReplyDto);
+
+            return ResponseEntity.ok().body(ResponseDTO.builder().data("Update course done.").build());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(ResponseDTO.builder().error(e.getMessage()).build());
+        }
+
     }
     
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteCourseReply(@PathVariable int id) throws Exception{
-    	int result = courseReplyService.deleteCourseReply(id);
-    	
-    	return ResponseEntity.ok().body(result);
+    public ResponseEntity<?> deleteCourseReply(@PathVariable int id) {
+        try {
+            int result = courseReplyService.deleteCourseReply(id);
+
+            return ResponseEntity.ok().body(ResponseDTO.builder().data("Delete course done.").build());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(ResponseDTO.builder().error(e.getMessage()).build());
+        }
+
     }
 }

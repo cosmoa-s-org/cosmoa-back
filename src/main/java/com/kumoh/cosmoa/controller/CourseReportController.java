@@ -27,31 +27,50 @@ public class CourseReportController {
 
     @GetMapping("")
     public ResponseEntity<?> getCourseReportList() {
-        List<CourseReportDTO> dtos = courseReportService.findAll();
-        ResponseDTO<List<CourseReportDTO>> response = ResponseDTO.<List<CourseReportDTO>>builder().data(dtos).build();
+        try {
+            List<CourseReportDTO> dtos = courseReportService.findAll();
+            ResponseDTO<List<CourseReportDTO>> response = ResponseDTO.<List<CourseReportDTO>>builder().data(dtos).build();
 
-        return ResponseEntity.ok().body(response);
+            return ResponseEntity.ok().body(response);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(ResponseDTO.builder().error(e.getMessage()).build());
+        }
+
     }
     
     @PostMapping("")
-    public ResponseEntity<?> createCourseReport(CourseReportDTO courseReportDto) throws Exception{
-    	int result = courseReportService.createCourseReport(courseReportDto);
-    	
-    	return ResponseEntity.ok().body(result);
+    public ResponseEntity<?> createCourseReport(CourseReportDTO courseReportDto) {
+        try {
+            int result = courseReportService.createCourseReport(courseReportDto);
+
+            return ResponseEntity.ok().body(ResponseDTO.builder().data("Create course report done.").build());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(ResponseDTO.builder().error(e.getMessage()).build());
+        }
     }
     
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateCourseReport(@PathVariable int id, CourseReportDTO courseReportDto) throws Exception{
-    	courseReportDto.setId(id);
-    	int result = courseReportService.updateCourseReport(courseReportDto);
-    	
-    	return ResponseEntity.ok().body(result);
+    public ResponseEntity<?> updateCourseReport(@PathVariable int id, CourseReportDTO courseReportDto) {
+        try {
+            courseReportDto.setId(id);
+            int result = courseReportService.updateCourseReport(courseReportDto);
+
+            return ResponseEntity.ok().body(ResponseDTO.builder().data("Update course report done.").build());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(ResponseDTO.builder().error(e.getMessage()).build());
+        }
+
     }
     
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteCourseReport(@PathVariable int id) throws Exception{
-    	int result = courseReportService.deleteCourseReport(id);
-    	
-    	return ResponseEntity.ok().body(result);
+    public ResponseEntity<?> deleteCourseReport(@PathVariable int id) {
+        try {
+            int result = courseReportService.deleteCourseReport(id);
+
+            return ResponseEntity.ok().body(ResponseDTO.builder().data("Delete course report done.").build());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(ResponseDTO.builder().error(e.getMessage()).build());
+        }
+
     }
 }

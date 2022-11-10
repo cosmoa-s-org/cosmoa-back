@@ -51,7 +51,7 @@ public class PlaceLikeController {
             int count = placeLikeService.countByPlaceId(placeId);
             return ResponseEntity.ok().body(ResponseDTO.builder().data(count).build());
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+            return ResponseEntity.badRequest().body(ResponseDTO.builder().error(e.getMessage()).build());
         }
     }
 
@@ -62,7 +62,7 @@ public class PlaceLikeController {
             ResponseDTO response = ResponseDTO.builder().data(isDelete).build();
             return ResponseEntity.ok().body(response);
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+            return ResponseEntity.badRequest().body(ResponseDTO.builder().error(e.getMessage()).build());
         }
     }
 }

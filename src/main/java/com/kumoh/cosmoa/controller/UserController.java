@@ -43,14 +43,14 @@ public class UserController {
     		int result = userService.signUp(userDto);
     		if(result==1)
     		{
-    			return ResponseEntity.ok().body("유저 등록 성공");    
+    			return ResponseEntity.ok().body(ResponseDTO.builder().data("유저 등록 성공").build());
     		}
     		else
     		{
-    			return ResponseEntity.ok().body("유저 등록 실패");    		
+    			return ResponseEntity.ok().body(ResponseDTO.builder().data("유저 등록 실패").build());
     		}    		
     	} catch (Exception e) {
-    		return ResponseEntity.badRequest().body(e.getMessage());
+    		return ResponseEntity.badRequest().body(ResponseDTO.builder().error(e.getMessage()).build());
     	}
     }
     
@@ -61,14 +61,14 @@ public class UserController {
     		int result = userService.updateUser(userDto);
     		if(result==1)
     		{
-    			return ResponseEntity.ok().body("유저 정보 수정 성공");   
+    			return ResponseEntity.ok().body(ResponseDTO.builder().data("유저 정보 수정 성공").build());
     		}
     		else
     		{
-    			return ResponseEntity.ok().body("유저 정보 수정 실패");  
+    			return ResponseEntity.ok().body(ResponseDTO.builder().data("유저 정보 수정 실패").build());
     		}	
     	} catch (Exception e) {
-    		return ResponseEntity.badRequest().body(e.getMessage());
+    		return ResponseEntity.badRequest().body(ResponseDTO.builder().error(e.getMessage()).build());
     	}
     }
     
@@ -79,14 +79,14 @@ public class UserController {
     		
     		if(result==1)
     		{
-    			return ResponseEntity.ok().body(email + "유저 삭제 완료");    		    			
+    			return ResponseEntity.ok().body(ResponseDTO.builder().data(email + " 유저 삭제 완료").build());
     		}
     		else
     		{
-    			return ResponseEntity.ok().body("유저 삭제 실패");
+    			return ResponseEntity.ok().body(ResponseDTO.builder().data("유저 삭제 실패").build());
     		}
     	} catch (Exception e) {
-    		return ResponseEntity.badRequest().body(e.getMessage());
+    		return ResponseEntity.badRequest().body(ResponseDTO.builder().error(e.getMessage()).build());
     	}
     }
     
@@ -101,10 +101,10 @@ public class UserController {
     		{
     			return ResponseEntity.ok().body(ResponseDTO.builder().data(originalUser).build());
     		}
-    		else return ResponseEntity.ok().body("비밀번호 불일치");
+    		else return ResponseEntity.ok().body(ResponseDTO.builder().error(("비밀번호 불일치")).build());
     		
     	} catch (Exception e) {
-    		return ResponseEntity.badRequest().body(e.getMessage());
+    		return ResponseEntity.badRequest().body(ResponseDTO.builder().error(e.getMessage()).build());
     	}
     }
     @GetMapping("/logout")
