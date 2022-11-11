@@ -21,38 +21,6 @@ public class CourseComposeController {
         this.courseComposeService = courseComposeService;
     }
 
-    @PostMapping("")
-    public ResponseEntity<?> create(@RequestBody CourseComposeRequestDTO dto) {
-        /*
-         * POST /course-compose
-         * body: {
-         *      "composeList" : [
-                    {
-                        "costTime" : 10,
-                        "sequence" : 1,
-                        "courseId" : 1,
-                        "placeId" : 14
-                    },
-                    {
-                        "costTime" : 15,
-                        "sequence" : 2,
-                        "courseId" : 1,
-                        "placeId" : 14
-                    }
-                ]
-         * }
-         *
-         * */
-
-        try {
-            log.info("CourseComposeDTO: {}", dto);
-            courseComposeService.insertCompose(dto);
-            return ResponseEntity.ok().body(ResponseDTO.builder().data("Insert compose done.").build());
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(ResponseDTO.builder().error(e.getMessage()).build());
-        }
-    }
-
     @PutMapping("")
     public ResponseEntity<?> update(@RequestBody CourseComposeRequestDTO dto) {
         try {

@@ -21,7 +21,8 @@ public class CourseService {
     }
     
     public int createCourse(CourseDTO courseDto) {
-    	return courseMapper.createCourse(courseDto);
+        courseMapper.createCourse(courseDto);
+    	return courseDto.getId();
     }
     
     public int deleteCourse(int id) {

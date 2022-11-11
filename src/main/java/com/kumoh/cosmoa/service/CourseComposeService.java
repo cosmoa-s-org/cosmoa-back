@@ -26,15 +26,14 @@ public class CourseComposeService {
         return dtos;
     }
 
-    public void insertCompose(CourseComposeRequestDTO dto) {
-        List<ComposeDTO> list = dto.getComposeList();
+    public void insertCompose(int courseId, List<ComposeDTO> list) {
         for (int i = 0; i < list.size(); i++) {
+            list.get(i).setCourseId(courseId);
             courseComposeMapper.insertCompose(list.get(i));
         }
     }
 
-    public void updateCompose(CourseComposeRequestDTO dto) {
-        List<ComposeDTO> list = dto.getComposeList();
+    public void updateCompose(List<ComposeDTO> list) {
         for (int i = 0; i < list.size(); i++) {
             courseComposeMapper.updateCompose(list.get(i));
         }
