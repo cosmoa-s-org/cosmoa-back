@@ -11,6 +11,6 @@ import lombok.NoArgsConstructor;
 @Builder
 public class CourseLikeDTO {
     private int id;
-    private int user_id;
-    private int course_id;
+    private int userId;
+    private int courseId;
 }
