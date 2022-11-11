@@ -24,6 +24,7 @@
         CREATED_DATE,
         MODIFIED_DATE
         FROM    PLACE_REPLY
+        WHERE   PLACE_ID = #{placeId}
     </select>
 
     <select id="getPlaceReply" resultMap="PlaceReplyDTO">

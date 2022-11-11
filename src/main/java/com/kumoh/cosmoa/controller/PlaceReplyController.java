@@ -43,7 +43,7 @@ public class PlaceReplyController {
     }
 
     @GetMapping("/{placeId}")
-    public ResponseEntity<?> read(@PathVariable int placeId) {
+    public ResponseEntity<?> readByPlaceId(@PathVariable int placeId) {
         try {
             List<PlaceReplyResponseDTO> dtos = placeReplyService.findByPlaceId(placeId);
             ResponseDTO<List<PlaceReplyResponseDTO>> response =
