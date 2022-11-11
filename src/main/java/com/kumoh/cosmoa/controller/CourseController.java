@@ -2,6 +2,7 @@ package com.kumoh.cosmoa.controller;
 
 import com.kumoh.cosmoa.dto.CourseDTO;
 import com.kumoh.cosmoa.dto.CourseRequestDTO;
+import com.kumoh.cosmoa.dto.CourseResponseDTO;
 import com.kumoh.cosmoa.dto.ResponseDTO;
 import com.kumoh.cosmoa.service.CourseComposeService;
 import com.kumoh.cosmoa.service.CourseService;
@@ -28,8 +29,10 @@ public class CourseController {
     @GetMapping("")
     public ResponseEntity<?> getCourseList() {
         try {
-            List<CourseDTO> dtos = courseService.findAll();
-            ResponseDTO<List<CourseDTO>> response = ResponseDTO.<List<CourseDTO>>builder().data(dtos).build();
+//            List<CourseDTO> dtos = courseService.findAll();
+//            ResponseDTO<List<CourseDTO>> response = ResponseDTO.<List<CourseDTO>>builder().data(dtos).build();
+            List<CourseResponseDTO> dtos = courseService.findCourseResponseList();
+            ResponseDTO<List<CourseResponseDTO>> response = ResponseDTO.<List<CourseResponseDTO>>builder().data(dtos).build();
 
             return ResponseEntity.ok().body(response);
         } catch (Exception e) {
