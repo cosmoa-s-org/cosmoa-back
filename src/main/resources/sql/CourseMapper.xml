@@ -4,6 +4,22 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.kumoh.cosmoa.mapper.CourseMapper">
+    <resultMap type="com.kumoh.cosmoa.dto.CourseDTO" id="CourseDTO">
+        <result property="id" column="ID" />
+        <result property="name" column="NAME" />
+        <result property="description" column="DESCRIPTION" />
+        <result property="createdDate" column="CREATED_DATE" />
+        <result property="modifiedDate" column="MODIFIED_DATE" />
+        <result property="userId" column="USER_ID" />
+    </resultMap>
+
+    <resultMap type="com.kumoh.cosmoa.dto.CourseDetailResponseDTO" id="CourseDetailResponseDTO">
+        <result property="nickname" column="NICKNAME" />
+        <result property="like" column="LIKE" />
+        <result property="isLike" column="IS_LIKE" />
+        <collection property="course" resultMap="CourseDTO" />
+    </resultMap>
+
     <select id="getCourseList" resultType="com.kumoh.cosmoa.dto.CourseDTO">
         SELECT  ID,
                 NAME,
@@ -24,6 +40,31 @@
         FROM COURSE c, USER u
         WHERE c.USER_ID = u.ID
     </select>
+
+    <select id="getCourseDetail" resultMap="CourseDetailResponseDTO">
+        SELECT
+        c.ID,
+        c.NAME,
+        c.DESCRIPTION,
+        c.CREATED_DATE,
+        c.MODIFIED_DATE,
+        (SELECT nickname FROM USER u WHERE c.USER_ID = u.ID) AS NICKNAME,
+        (SELECT count(*) FROM COURSE_LIKE cl WHERE cl.COURSE_ID = c.ID) AS `LIKE`,
+        (SELECT count(*) FROM COURSE_LIKE cl WHERE cl.COURSE_ID = #{courseId} and cl.USER_ID = #{userId}) as `IS_LIKE`
+        FROM COURSE c
+        WHERE c.ID = #{courseId}
+    </select>
+
+    <select id="getCourse" resultType="com.kumoh.cosmoa.dto.CourseDTO">
+        SELECT  ID,
+        NAME,
+        DESCRIPTION,
+        CREATED_DATE,
+        MODIFIED_DATE,
+        USER_ID
+        FROM COURSE
+    </select>
+
     <!-- 코스생성 -->
     <insert id="createCourse" parameterType="com.kumoh.cosmoa.dto.CourseDTO" useGeneratedKeys="true"
     keyProperty="id">

@@ -1,9 +1,6 @@
 package com.kumoh.cosmoa.controller;
 
-import com.kumoh.cosmoa.dto.CourseDTO;
-import com.kumoh.cosmoa.dto.CourseRequestDTO;
-import com.kumoh.cosmoa.dto.CourseResponseDTO;
-import com.kumoh.cosmoa.dto.ResponseDTO;
+import com.kumoh.cosmoa.dto.*;
 import com.kumoh.cosmoa.service.CourseComposeService;
 import com.kumoh.cosmoa.service.CourseService;
 import lombok.extern.slf4j.Slf4j;
@@ -33,6 +30,19 @@ public class CourseController {
 //            ResponseDTO<List<CourseDTO>> response = ResponseDTO.<List<CourseDTO>>builder().data(dtos).build();
             List<CourseResponseDTO> dtos = courseService.findCourseResponseList();
             ResponseDTO<List<CourseResponseDTO>> response = ResponseDTO.<List<CourseResponseDTO>>builder().data(dtos).build();
+
+            return ResponseEntity.ok().body(response);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(ResponseDTO.builder().error(e.getMessage()).build());
+        }
+    }
+
+    @GetMapping("/detail")
+    public ResponseEntity<?> getCourseDetail(@RequestParam("courseId") int courseId,
+                                             @RequestParam("userId") int userId) {
+        try {
+            CourseDetailResponseDTO dto = courseService.findCourseDetail(courseId, userId);
+            ResponseDTO<CourseDetailResponseDTO> response = ResponseDTO.<CourseDetailResponseDTO>builder().data(dto).build();
 
             return ResponseEntity.ok().body(response);
         } catch (Exception e) {
