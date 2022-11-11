@@ -13,9 +13,9 @@ import lombok.NoArgsConstructor;
 @Builder
 public class CourseReplyDTO {
     private int id;
-    private int user_id;
-    private int course_id;
+    private int userId;
+    private int courseId;
     private String comment;
-    private String created_date;
-    private String modified_date;
+    private String createdDate;
+    private String modifiedDate;
 }
