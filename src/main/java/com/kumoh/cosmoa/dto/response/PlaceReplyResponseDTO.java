@@ -1,5 +1,6 @@
-package com.kumoh.cosmoa.dto;
+package com.kumoh.cosmoa.dto.response;
 
+import com.kumoh.cosmoa.dto.PlaceReplyDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

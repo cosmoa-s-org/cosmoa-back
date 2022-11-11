@@ -27,7 +27,7 @@
         <result property="userId" column="USER_ID" />
     </resultMap>
 
-    <resultMap type="com.kumoh.cosmoa.dto.ComposeResponseDTO" id="ComposeResponseDTO">
+    <resultMap type="com.kumoh.cosmoa.dto.response.ComposeResponseDTO" id="ComposeResponseDTO">
         <result property="id" column="ID" />
         <result property="sequence" column="SEQUENCE" />
         <result property="costTime" column="COST_TIME" />

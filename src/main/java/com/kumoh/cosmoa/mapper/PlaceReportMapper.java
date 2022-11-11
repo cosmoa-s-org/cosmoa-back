@@ -1,7 +1,7 @@
 package com.kumoh.cosmoa.mapper;
 
 import com.kumoh.cosmoa.dto.PlaceReportDTO;
-import com.kumoh.cosmoa.dto.PlaceReportResponseDTO;
+import com.kumoh.cosmoa.dto.response.PlaceReportResponseDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

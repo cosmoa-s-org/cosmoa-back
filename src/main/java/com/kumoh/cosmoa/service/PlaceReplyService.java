@@ -1,7 +1,7 @@
 package com.kumoh.cosmoa.service;
 
 import com.kumoh.cosmoa.dto.PlaceReplyDTO;
-import com.kumoh.cosmoa.dto.PlaceReplyResponseDTO;
+import com.kumoh.cosmoa.dto.response.PlaceReplyResponseDTO;
 import com.kumoh.cosmoa.mapper.PlaceReplyMapper;
 import com.kumoh.cosmoa.util.FileUtils;
 import lombok.extern.slf4j.Slf4j;

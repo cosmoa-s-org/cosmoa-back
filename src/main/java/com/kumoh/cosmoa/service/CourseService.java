@@ -1,8 +1,8 @@
 package com.kumoh.cosmoa.service;
 
 import com.kumoh.cosmoa.dto.CourseDTO;
-import com.kumoh.cosmoa.dto.CourseDetailResponseDTO;
-import com.kumoh.cosmoa.dto.CourseResponseDTO;
+import com.kumoh.cosmoa.dto.response.CourseDetailResponseDTO;
+import com.kumoh.cosmoa.dto.response.CourseResponseDTO;
 import com.kumoh.cosmoa.mapper.CourseMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

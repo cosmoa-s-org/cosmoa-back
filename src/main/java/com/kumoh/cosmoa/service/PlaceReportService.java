@@ -2,7 +2,7 @@ package com.kumoh.cosmoa.service;
 
 
 import com.kumoh.cosmoa.dto.PlaceReportDTO;
-import com.kumoh.cosmoa.dto.PlaceReportResponseDTO;
+import com.kumoh.cosmoa.dto.response.PlaceReportResponseDTO;
 import com.kumoh.cosmoa.mapper.PlaceReportMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

@@ -1,7 +1,7 @@
 package com.kumoh.cosmoa.controller;
 
 import com.kumoh.cosmoa.dto.PlaceReportDTO;
-import com.kumoh.cosmoa.dto.PlaceReportResponseDTO;
+import com.kumoh.cosmoa.dto.response.PlaceReportResponseDTO;
 import com.kumoh.cosmoa.dto.ResponseDTO;
 import com.kumoh.cosmoa.service.PlaceReportService;
 import org.springframework.http.ResponseEntity;

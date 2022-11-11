@@ -1,4 +1,4 @@
-package com.kumoh.cosmoa.dto;
+package com.kumoh.cosmoa.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

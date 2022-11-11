@@ -1,8 +1,8 @@
 package com.kumoh.cosmoa.mapper;
 
 import com.kumoh.cosmoa.dto.CourseDTO;
-import com.kumoh.cosmoa.dto.CourseDetailResponseDTO;
-import com.kumoh.cosmoa.dto.CourseResponseDTO;
+import com.kumoh.cosmoa.dto.response.CourseDetailResponseDTO;
+import com.kumoh.cosmoa.dto.response.CourseResponseDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

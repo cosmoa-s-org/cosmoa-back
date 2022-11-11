@@ -1,9 +1,8 @@
 package com.kumoh.cosmoa.service;
 
 import com.kumoh.cosmoa.dto.ComposeDTO;
-import com.kumoh.cosmoa.dto.ComposeResponseDTO;
-import com.kumoh.cosmoa.dto.CourseComposeRequestDTO;
-import com.kumoh.cosmoa.dto.CourseComposeResponseDTO;
+import com.kumoh.cosmoa.dto.response.ComposeResponseDTO;
+import com.kumoh.cosmoa.dto.response.CourseComposeResponseDTO;
 import com.kumoh.cosmoa.mapper.CourseComposeMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

@@ -27,7 +27,7 @@
         <result property="age" column="AGE" />
     </resultMap>
 
-    <resultMap type="com.kumoh.cosmoa.dto.PlaceReportResponseDTO" id="PlaceReportResponseDTO">
+    <resultMap type="com.kumoh.cosmoa.dto.response.PlaceReportResponseDTO" id="PlaceReportResponseDTO">
         <result property="id" column="ID" />
         <result property="type" column="TYPE" />
         <collection property="place" resultMap="PlaceDTO" />

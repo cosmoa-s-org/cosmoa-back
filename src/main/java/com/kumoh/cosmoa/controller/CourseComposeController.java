@@ -1,7 +1,7 @@
 package com.kumoh.cosmoa.controller;
 
-import com.kumoh.cosmoa.dto.CourseComposeRequestDTO;
-import com.kumoh.cosmoa.dto.CourseComposeResponseDTO;
+import com.kumoh.cosmoa.dto.request.CourseComposeRequestDTO;
+import com.kumoh.cosmoa.dto.response.CourseComposeResponseDTO;
 import com.kumoh.cosmoa.dto.ResponseDTO;
 import com.kumoh.cosmoa.service.CourseComposeService;
 import lombok.extern.slf4j.Slf4j;

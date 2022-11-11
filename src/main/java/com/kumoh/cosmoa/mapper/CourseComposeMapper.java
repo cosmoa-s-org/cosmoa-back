@@ -1,7 +1,7 @@
 package com.kumoh.cosmoa.mapper;
 
 import com.kumoh.cosmoa.dto.ComposeDTO;
-import com.kumoh.cosmoa.dto.ComposeResponseDTO;
+import com.kumoh.cosmoa.dto.response.ComposeResponseDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
