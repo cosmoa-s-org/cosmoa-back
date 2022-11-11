@@ -8,7 +8,7 @@ import java.util.List;
 @Mapper
 public interface CourseMapper {
 
-    List<CourseDTO> getUserList();
+    List<CourseDTO> getCourseList();
     int createCourse(CourseDTO courseDto);
     int deleteCourse(int id);
     int updateCourse(CourseDTO courseDto);

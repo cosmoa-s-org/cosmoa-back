@@ -17,7 +17,7 @@ public class CourseService {
     }
 
     public List<CourseDTO> findAll() {
-        return courseMapper.getUserList();
+        return courseMapper.getCourseList();
     }
     
     public int createCourse(CourseDTO courseDto) {
