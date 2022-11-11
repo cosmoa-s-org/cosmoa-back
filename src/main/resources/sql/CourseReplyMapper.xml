@@ -14,7 +14,7 @@
         FROM COURSE_REPLY
     </select>
 
-    <select id="getCourseReplyList" resultType="com.kumoh.cosmoa.dto.CourseReplyDTO">
+    <select id="getCourseReplyListByCourseId" resultType="com.kumoh.cosmoa.dto.CourseReplyDTO">
         SELECT  ID,
         USER_ID,
         COURSE_ID,
