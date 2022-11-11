@@ -13,6 +13,17 @@
                 MODIFIED_DATE
         FROM COURSE_REPLY
     </select>
+
+    <select id="getCourseReplyList" resultType="com.kumoh.cosmoa.dto.CourseReplyDTO">
+        SELECT  ID,
+        USER_ID,
+        COURSE_ID,
+        COMMENT,
+        CREATED_DATE,
+        MODIFIED_DATE
+        FROM COURSE_REPLY
+        WHERE COURSE_ID = #{courseId}
+    </select>
     <!-- 코스댓글생성 -->
     <insert id="createCourseReply" parameterType="com.kumoh.cosmoa.dto.CourseReplyDTO" useGeneratedKeys="true"
     keyProperty="id">

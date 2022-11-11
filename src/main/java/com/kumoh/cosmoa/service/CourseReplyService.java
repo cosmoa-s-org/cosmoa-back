@@ -20,6 +20,10 @@ public class CourseReplyService {
     public List<CourseReplyDTO> findAll() {
         return courseReplyMapper.getCourseReplyList();
     }
+
+    public List<CourseReplyDTO> findByCourseId(int courseId) {
+        return courseReplyMapper.getCourseReplyListByCourseId(courseId);
+    }
     
     public int createCourseReply(CourseReplyDTO courseReplyDto) {
     	return courseReplyMapper.createCourseReply(courseReplyDto);

@@ -44,6 +44,18 @@ public class CourseReplyController {
             return ResponseEntity.badRequest().body(ResponseDTO.builder().error(e.getMessage()).build());
         }
     }
+
+    @GetMapping("/{courseId}")
+    public ResponseEntity<?> getCourseReplyListByCourseId(@PathVariable int courseId) {
+        try {
+            List<CourseReplyDTO> dtos = courseReplyService.findByCourseId(courseId);
+            ResponseDTO<List<CourseReplyDTO>> response = ResponseDTO.<List<CourseReplyDTO>>builder().data(dtos).build();
+
+            return ResponseEntity.ok().body(response);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(ResponseDTO.builder().error(e.getMessage()).build());
+        }
+    }
     
     @PostMapping("")
     public ResponseEntity<?> createReplyCourse(CourseReplyDTO courseReplyDto) {
