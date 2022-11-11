@@ -21,11 +21,10 @@
     <!-- 코스좋아요 -->
     <insert id="createCourseLike" parameterType="com.kumoh.cosmoa.dto.CourseLikeDTO" useGeneratedKeys="true"
     keyProperty="id">
-    	INSERT INTO COURSE_Like(
-     					ID,
+    	INSERT INTO COURSE_LIKE(
                 		USER_ID,
-                		COURSE_ID
-     	VALUES(#{id}, #{user_id}, #{course_id})
+                		COURSE_ID )
+     	VALUES(#{param.userId}, #{param.courseId})
     </insert>
     
     <!-- 코스좋아요취소 -->

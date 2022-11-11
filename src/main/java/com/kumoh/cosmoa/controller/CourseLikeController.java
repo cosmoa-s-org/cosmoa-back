@@ -7,13 +7,7 @@ import com.kumoh.cosmoa.service.CourseLikeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -43,7 +37,7 @@ public class CourseLikeController {
     public ResponseEntity<?> existsByCourseIdAndUserId(@RequestParam int courseId,
                                                     @RequestParam int userId) {
         try {
-            CourseLikeDTO dto = CourseLikeDTO.builder().course_id(courseId).user_id(userId).build();
+            CourseLikeDTO dto = CourseLikeDTO.builder().courseId(courseId).userId(userId).build();
             int isLike = courseLikeService.existsByCourseIdAndUserId(dto);
             return ResponseEntity.ok().body(ResponseDTO.builder().data(isLike).build());
         } catch (Exception e) {
@@ -53,7 +47,7 @@ public class CourseLikeController {
     
     //좋아요 누르기
     @PostMapping("")
-    public ResponseEntity<?> createCourseLike(CourseLikeDTO courseLikeDto) {
+    public ResponseEntity<?> createCourseLike(@RequestBody CourseLikeDTO courseLikeDto) {
         try {
             int result = courseLikeService.createCourseLike(courseLikeDto);
             return ResponseEntity.ok().body(ResponseDTO.builder().data("Like done.").build());
