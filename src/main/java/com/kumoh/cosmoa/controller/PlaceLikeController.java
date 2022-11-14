@@ -55,10 +55,10 @@ public class PlaceLikeController {
         }
     }
 
-    @DeleteMapping("/{likeId}")
-    public ResponseEntity<?> delete(@PathVariable int likeId) {
+    @DeleteMapping("")
+    public ResponseEntity<?> delete(@RequestBody PlaceLikeDTO dto) {
         try {
-            boolean isDelete = placeLikeService.delete(likeId);
+            boolean isDelete = placeLikeService.delete(dto);
             ResponseDTO response = ResponseDTO.builder().data(isDelete).build();
             return ResponseEntity.ok().body(response);
         } catch (Exception e) {

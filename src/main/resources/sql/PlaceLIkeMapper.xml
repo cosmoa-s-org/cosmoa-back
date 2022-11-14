@@ -34,6 +34,7 @@
 
     <delete id="deletePlaceLike">
         DELETE FROM PLACE_LIKE
-        WHERE ID=#{likeId}
+        WHERE   PLACE_ID = #{param.placeId}
+        AND     USER_ID =  #{param.userId}
     </delete>
 </mapper>

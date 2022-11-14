@@ -31,7 +31,7 @@ public class PlaceLikeService {
         return placeLikeMapper.countByPlaceIdAndUserId(dto) == 1;
     }
 
-    public boolean delete(int likeId) {
-        return placeLikeMapper.deletePlaceLike(likeId) == 1;
+    public boolean delete(PlaceLikeDTO dto) {
+        return placeLikeMapper.deletePlaceLike(dto) == 1;
     }
 }
