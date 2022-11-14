@@ -14,16 +14,17 @@
         FROM COURSE_REPLY
     </select>
 
-    <select id="getCourseReplyListByCourseId" resultType="com.kumoh.cosmoa.dto.CourseReplyDTO">
-        SELECT  ID,
-        USER_ID,
-        COURSE_ID,
-        COMMENT,
-        CREATED_DATE,
-        MODIFIED_DATE
-        FROM COURSE_REPLY
-        WHERE COURSE_ID = #{courseId}
+    <select id="getCourseReplyListByCourseId" resultType="com.kumoh.cosmoa.dto.response.CourseReplyResponseDTO">
+		SELECT	U.NICKNAME,
+		 		U.ID AS USER_ID,
+		 		CR.COMMENT,
+		 		CR.CREATED_DATE,
+		 		CR.MODIFIED_DATE,
+		 		CR.ID AS COURSE_REPLY_ID
+		FROM USER U, COURSE_REPLY CR
+		WHERE CR.COURSE_ID = #{courseId}  AND CR.USER_ID = U.ID
     </select>
+    
     <!-- 코스댓글생성 -->
     <insert id="createCourseReply" parameterType="com.kumoh.cosmoa.dto.CourseReplyDTO" useGeneratedKeys="true"
     keyProperty="id">

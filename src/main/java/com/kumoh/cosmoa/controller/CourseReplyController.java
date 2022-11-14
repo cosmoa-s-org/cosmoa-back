@@ -2,6 +2,7 @@ package com.kumoh.cosmoa.controller;
 
 import com.kumoh.cosmoa.dto.CourseReplyDTO;
 import com.kumoh.cosmoa.dto.ResponseDTO;
+import com.kumoh.cosmoa.dto.response.CourseReplyResponseDTO;
 import com.kumoh.cosmoa.service.CourseReplyService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +25,7 @@ import java.sql.Date;
 import java.util.List;
 
 @Controller
-@RequestMapping("/course_reply")
+@RequestMapping("/course-reply")
 @Slf4j
 public class CourseReplyController {
     private CourseReplyService courseReplyService;
@@ -48,8 +49,8 @@ public class CourseReplyController {
     @GetMapping("/{courseId}")
     public ResponseEntity<?> getCourseReplyListByCourseId(@PathVariable int courseId) {
         try {
-            List<CourseReplyDTO> dtos = courseReplyService.findByCourseId(courseId);
-            ResponseDTO<List<CourseReplyDTO>> response = ResponseDTO.<List<CourseReplyDTO>>builder().data(dtos).build();
+            List<CourseReplyResponseDTO> dtos = courseReplyService.findByCourseId(courseId);
+            ResponseDTO<List<CourseReplyResponseDTO>> response = ResponseDTO.<List<CourseReplyResponseDTO>>builder().data(dtos).build();
 
             return ResponseEntity.ok().body(response);
         } catch (Exception e) {

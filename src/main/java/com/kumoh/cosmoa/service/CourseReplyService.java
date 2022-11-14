@@ -1,6 +1,7 @@
 package com.kumoh.cosmoa.service;
 
 import com.kumoh.cosmoa.dto.CourseReplyDTO;
+import com.kumoh.cosmoa.dto.response.CourseReplyResponseDTO;
 import com.kumoh.cosmoa.mapper.CourseReplyMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ public class CourseReplyService {
         return courseReplyMapper.getCourseReplyList();
     }
 
-    public List<CourseReplyDTO> findByCourseId(int courseId) {
+    public List<CourseReplyResponseDTO> findByCourseId(int courseId) {
         return courseReplyMapper.getCourseReplyListByCourseId(courseId);
     }
     
