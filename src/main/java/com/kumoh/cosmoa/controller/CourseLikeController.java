@@ -56,10 +56,10 @@ public class CourseLikeController {
         }
     }
     
-    @DeleteMapping("/{likeId}")
-    public ResponseEntity<?> deleteCourse(@PathVariable int likeId) {
+    @DeleteMapping("")
+    public ResponseEntity<?> deleteCourse(@RequestBody CourseLikeDTO courseLikeDto) {
         try {
-            int result = courseLikeService.deleteCourseLike(likeId);
+            int result = courseLikeService.deleteCourseLike(courseLikeDto);
             return ResponseEntity.ok().body(ResponseDTO.builder().data("Delete course done.").build());
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(ResponseDTO.builder().error(e.getMessage()).build());

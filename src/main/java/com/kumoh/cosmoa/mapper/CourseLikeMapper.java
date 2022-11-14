@@ -12,5 +12,5 @@ public interface CourseLikeMapper {
     int countByCourseId(@Param("courseId") int courseId);
     int existsByCourseIdAndUserId(@Param("param") CourseLikeDTO dto);
     int createCourseLike(@Param("param") CourseLikeDTO dto);
-    int deleteCourseLike(@Param("likeId") int likeId);
+    int deleteCourseLike(@Param("param") CourseLikeDTO dto);
 }

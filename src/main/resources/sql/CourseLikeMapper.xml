@@ -29,7 +29,7 @@
     
     <!-- 코스좋아요취소 -->
     <delete id="deleteCourseLike" parameterType="int">
-    	DELETE FROM COURSE_REPLY WHERE ID = #{id}
+    	DELETE FROM COURSE_LIKE WHERE USER_ID = #{param.userId} AND COURSE_ID = #{param.courseId}
     </delete>
     
 </mapper>
