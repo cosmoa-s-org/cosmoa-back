@@ -9,5 +9,5 @@ public interface PlaceLikeMapper {
     int countByPlaceId(@Param("placeId") int placeId);
     int countByPlaceIdAndUserId(@Param("param") PlaceLikeDTO dto);
     int insertPlaceLike(@Param("param") PlaceLikeDTO dto);
-    int deletePlaceLike(@Param("likeId") int likeId);
+    int deletePlaceLike(@Param("param")  PlaceLikeDTO dto);
 }

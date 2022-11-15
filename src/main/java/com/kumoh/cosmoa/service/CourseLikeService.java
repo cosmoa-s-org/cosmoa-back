@@ -28,8 +28,8 @@ public class CourseLikeService {
     	return courseLikeMapper.createCourseLike(dto);
     }
     
-    public int deleteCourseLike(int id) {
-    	return courseLikeMapper.deleteCourseLike(id);
+    public int deleteCourseLike(CourseLikeDTO dto) {
+    	return courseLikeMapper.deleteCourseLike(dto);
     }
     
 }
