@@ -14,17 +14,27 @@
         <result property="createdDate" column="CREATED_DATE" />
         <result property="modifiedDate" column="MODIFIED_DATE" />
     </resultMap>
+    
+    <resultMap type="com.kumoh.cosmoa.dto.response.PlaceReplyResponseDTO" id="PlaceReplyResponseDTO">
+    	<result property="nickname" column="USER_NICKNAME" />
+    	<result property="id" column="ID" />
+        <result property="userId" column="USER_ID" />
+        <result property="comment" column="COMMENT" />
+        <result property="imgPath" column="IMG_PATH" />
+        <result property="createdDate" column="CREATED_DATE" />
+        <result property="modifiedDate" column="MODIFIED_DATE" />
+    </resultMap>
 
-    <select id="findByPlaceId" resultMap="PlaceReplyDTO">
-        SELECT  ID,
-        PLACE_ID,
-        USER_ID,
-        COMMENT,
-        IMG_PATH,
-        CREATED_DATE,
-        MODIFIED_DATE
-        FROM    PLACE_REPLY
-        WHERE   PLACE_ID = #{placeId}
+    <select id="findByPlaceId" resultMap="PlaceReplyResponseDTO">
+        SELECT  PR.ID AS PLACE_REPLY_ID,
+        		U.ID AS USER_ID,
+        		U.NICKNAME,
+        		PR.COMMENT,
+        		PR.IMG_PATH,
+        		PR.CREATED_DATE,
+        		PR.MODIFIED_DATE
+        FROM    PLACE_REPLY PR, USER U
+        WHERE   PLACE_ID = #{placeId} AND PR.USER_ID = U.ID
     </select>
 
     <select id="getPlaceReply" resultMap="PlaceReplyDTO">

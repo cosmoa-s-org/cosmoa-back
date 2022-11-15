@@ -17,17 +17,17 @@ import java.nio.file.Paths;
 @AllArgsConstructor
 @Builder
 public class PlaceReplyResponseDTO {
-    private int id;
-    private int placeId;
+    private String nickname;
+	private int id;
     private int userId;
     private String comment;
     private byte[] img;
     private String createdDate;
     private String modifiedDate;
+    private String imgPath;
 
-    public PlaceReplyResponseDTO(PlaceReplyDTO dto) {
+    public PlaceReplyResponseDTO(PlaceReplyResponseDTO dto) {
         this.id = dto.getId();
-        this.placeId = dto.getPlaceId();
         this.userId = dto.getUserId();
         this.comment = dto.getComment();
         this.createdDate = dto.getCreatedDate();

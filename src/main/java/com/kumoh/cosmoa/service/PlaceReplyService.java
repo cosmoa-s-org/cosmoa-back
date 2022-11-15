@@ -30,7 +30,7 @@ public class PlaceReplyService {
     }
 
     public List<PlaceReplyResponseDTO> findByPlaceId(int placeId) {
-        List<PlaceReplyDTO> dtos = placeReplyMapper.findByPlaceId(placeId);
+        List<PlaceReplyResponseDTO> dtos = placeReplyMapper.findByPlaceId(placeId);
 
         return dtos.stream().map(PlaceReplyResponseDTO::new).collect(Collectors.toList());
     }
