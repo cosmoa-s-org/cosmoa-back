@@ -26,16 +26,15 @@
     </select>
     
     <!-- 코스댓글생성 -->
-    <insert id="createCourseReply" parameterType="com.kumoh.cosmoa.dto.CourseReplyDTO" useGeneratedKeys="true"
+    <insert id="createCourseReply" useGeneratedKeys="true"
     keyProperty="id">
     	INSERT INTO COURSE_REPLY(
-     					ID,
                 		USER_ID,
                 		COURSE_ID,
-                		COMMENT,
+                		comment,
                 		CREATED_DATE,
                 		MODIFIED_DATE)
-     	VALUES(#{id}, #{user_id}, #{course_id}, #{comment}, NOW(), NOW())
+     	VALUES(#{param.userId}, #{param.courseId}, #{param.comment}, NOW(), NOW())
     </insert>
     
     <!-- 코스댓글삭제 -->
