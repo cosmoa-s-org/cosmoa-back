@@ -15,5 +15,5 @@ public interface CourseReplyMapper {
     List<CourseReplyResponseDTO> getCourseReplyListByCourseId(@Param("courseId") int courseId);
     int createCourseReply(@Param("param") CourseReplyDTO courseReplyDto);
     int deleteCourseReply(int id);
-    int updateCourseReply(CourseReplyDTO courseReplyDto);
+    int updateCourseReply(@Param("param") CourseReplyDTO courseReplyDto);
 }

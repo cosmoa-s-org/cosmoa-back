@@ -14,4 +14,5 @@ public class CourseResponseDTO {
     private String name;
     private int like;
     private String nickname;
+    private int replyCount;
 }
