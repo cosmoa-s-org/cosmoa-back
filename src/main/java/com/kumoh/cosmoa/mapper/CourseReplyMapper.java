@@ -13,7 +13,7 @@ public interface CourseReplyMapper {
 
     List<CourseReplyDTO> getCourseReplyList();
     List<CourseReplyResponseDTO> getCourseReplyListByCourseId(@Param("courseId") int courseId);
-    int createCourseReply(CourseReplyDTO courseReplyDto);
+    int createCourseReply(@Param("param") CourseReplyDTO courseReplyDto);
     int deleteCourseReply(int id);
     int updateCourseReply(CourseReplyDTO courseReplyDto);
 }

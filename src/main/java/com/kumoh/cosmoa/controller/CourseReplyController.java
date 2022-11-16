@@ -59,7 +59,7 @@ public class CourseReplyController {
     }
     
     @PostMapping("")
-    public ResponseEntity<?> createReplyCourse(CourseReplyDTO courseReplyDto) {
+    public ResponseEntity<?> createReplyCourse(@RequestBody CourseReplyDTO courseReplyDto) {
         try {
             int result = courseReplyService.createCourseReply(courseReplyDto);
 
