@@ -21,7 +21,7 @@ public class FileUtils {
             if (os.contains("windows")) {
                 imageDirectory = new File("C:\\workspace\\images\\" + dir);
             } else if (os.contains("linux")) {
-                imageDirectory = new File("/dev/sda/" + dir);
+                imageDirectory = new File("/dev/sda1/images/" + dir);
             } else {
                 throw new RuntimeException("saveImage method in " + os + " not supported.");
             }
