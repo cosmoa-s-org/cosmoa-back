@@ -50,7 +50,7 @@
         p.IMG_PATH,
         p.CREATED_DATE,
         p.MODIFIED_DATE,
-        p.USER_ID
+        p.USER_ID,
         (SELECT nickname FROM USER u WHERE p.USER_ID = u.ID) AS NICKNAME,
         (SELECT count(*) FROM PLACE_LIKE pl WHERE pl.PLACE_ID = p.ID) AS `LIKE`,
         (SELECT count(*) FROM PLACE_LIKE pl WHERE pl.PLACE_ID = p.ID and pl.USER_ID = #{userId}) as `IS_LIKE`
