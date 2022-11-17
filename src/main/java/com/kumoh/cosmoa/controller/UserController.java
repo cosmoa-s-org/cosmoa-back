@@ -90,6 +90,7 @@ public class UserController {
     	}
     }
     
+    
     @DeleteMapping("/{email}")
     public ResponseEntity<?> deleteUserByEmail(@PathVariable String email) {
     	try {
