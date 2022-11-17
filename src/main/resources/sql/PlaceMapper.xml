@@ -18,6 +18,13 @@
         <result property="userId" column="USER_ID" />
 	</resultMap>
 
+    <resultMap type="com.kumoh.cosmoa.dto.response.PlaceDetailResponseDTO" id="PlaceDetailResponseDTO">
+        <result property="nickname" column="NICKNAME" />
+        <result property="like" column="LIKE" />
+        <result property="isLike" column="IS_LIKE" />
+        <collection property="place" resultMap="PlaceDTO" />
+    </resultMap>
+
     <select id="getPlaceList" resultMap="PlaceDTO">
         SELECT  ID,
                 USER_ID,
@@ -30,6 +37,25 @@
                 CREATED_DATE,
                 MODIFIED_DATE
         FROM    PLACE
+    </select>
+
+    <select id="findByPlaceId" resultMap="PlaceDetailResponseDTO">
+        SELECT
+        p.ID,
+        p.NAME,
+        p.ADDRESS,
+        p.LAT,
+        p.LNG,
+        p.DESCRIPTION,
+        p.IMG_PATH,
+        p.CREATED_DATE,
+        p.MODIFIED_DATE,
+        p.USER_ID
+        (SELECT nickname FROM USER u WHERE p.USER_ID = u.ID) AS NICKNAME,
+        (SELECT count(*) FROM PLACE_LIKE pl WHERE pl.PLACE_ID = p.ID) AS `LIKE`,
+        (SELECT count(*) FROM PLACE_LIKE pl WHERE pl.PLACE_ID = p.ID and pl.USER_ID = #{userId}) as `IS_LIKE`
+        FROM PLACE p
+        WHERE p.ID = #{placeId}
     </select>
 
     <select id="findByNameAndAddress" resultMap="PlaceDTO">

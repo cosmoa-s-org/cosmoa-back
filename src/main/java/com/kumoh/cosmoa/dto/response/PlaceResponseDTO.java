@@ -50,9 +50,6 @@ public class PlaceResponseDTO {
             if (dto.getImgPath() == null) return;
             Path path = Paths.get(dto.getImgPath());
             byte[] bytes = Files.readAllBytes(path);
-//            File file = new File(dto.getImgPath());
-//            FileItem fileItem = new DiskFileItemFactory().createItem("file",
-//                    Files.probeContentType(file.toPath()), false, file.getName());
             this.image = bytes;
         } catch (Exception e) {
             throw new RuntimeException(e);

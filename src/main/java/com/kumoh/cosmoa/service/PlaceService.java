@@ -1,6 +1,7 @@
 package com.kumoh.cosmoa.service;
 
 import com.kumoh.cosmoa.dto.PlaceDTO;
+import com.kumoh.cosmoa.dto.response.PlaceDetailResponseDTO;
 import com.kumoh.cosmoa.dto.response.PlaceResponseDTO;
 import com.kumoh.cosmoa.mapper.PlaceMapper;
 import com.kumoh.cosmoa.util.FileUtils;
@@ -65,5 +66,12 @@ public class PlaceService {
         List<PlaceDTO> dtos = placeMapper.findByNameAndAddress(search);
 
         return dtos.stream().map(PlaceResponseDTO::new).collect(Collectors.toList());
+    }
+
+    public PlaceDetailResponseDTO findByPlaceId(int placeId, int userId) {
+        PlaceDetailResponseDTO dto = placeMapper.findByPlaceId(placeId, userId);
+        dto.loadImage();
+
+        return dto;
     }
 }

@@ -1,6 +1,7 @@
 package com.kumoh.cosmoa.controller;
 
 import com.kumoh.cosmoa.dto.PlaceDTO;
+import com.kumoh.cosmoa.dto.response.PlaceDetailResponseDTO;
 import com.kumoh.cosmoa.dto.response.PlaceResponseDTO;
 import com.kumoh.cosmoa.dto.ResponseDTO;
 import com.kumoh.cosmoa.service.PlaceService;
@@ -99,6 +100,21 @@ public class PlaceController {
                             .data(dtos)
                             .build();
 
+            return ResponseEntity.ok().body(response);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(ResponseDTO.builder().error(e.getMessage()).build());
+        }
+    }
+
+    @GetMapping("/detail")
+    public ResponseEntity<?> searchByPlaceId(@RequestParam("placeId") int placeId,
+                                             @RequestParam("userId") int userId) {
+        try {
+            PlaceDetailResponseDTO dto = placeService.findByPlaceId(placeId, userId);
+            ResponseDTO<PlaceDetailResponseDTO> response =
+                    ResponseDTO.<PlaceDetailResponseDTO>builder()
+                            .data(dto)
+                            .build();
             return ResponseEntity.ok().body(response);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(ResponseDTO.builder().error(e.getMessage()).build());
