@@ -21,7 +21,7 @@ public class PlaceService {
     }
 
     public PlaceResponseDTO insert(PlaceDTO dto, MultipartFile img) {
-        String path = FileUtils.saveImage("C:\\workspace\\images\\place", String.valueOf(dto.getUserId()), img);
+        String path = FileUtils.saveImage("place", String.valueOf(dto.getUserId()), img);
         dto.setImgPath(path);
 
         if (placeMapper.insertPlace(dto) == 0) throw new RuntimeException("Insert Place failed. try again.");
@@ -34,7 +34,7 @@ public class PlaceService {
 
         if (img != null) {
             FileUtils.deleteImage(dto.getImgPath());
-            String path = FileUtils.saveImage("C:\\workspace\\images\\place", String.valueOf(dto.getUserId()), img);
+            String path = FileUtils.saveImage("place", String.valueOf(dto.getUserId()), img);
             dto.setImgPath(path);
         }
 

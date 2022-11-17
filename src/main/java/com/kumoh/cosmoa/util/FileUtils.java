@@ -10,14 +10,22 @@ import java.io.IOException;
 public class FileUtils {
     public static String saveImage(String dir, String id, MultipartFile image) {
         /*
-         * 1번째 파라미터 : 파일을 저장할 디렉토리
+         * 1번째 파라미터 : 파일을 저장할 디렉토리명
          * 2번째 파라미터 : 파일의 이름, System.currentTimeMillis() 값을 더해 파일 이름 정함
          * 3번째 파라미터 : Multipartfile image
-         *
          * */
         if (image == null) return null;
         try {
-            File imageDirectory = new File(dir);
+            String os = System.getProperty("os.name").toLowerCase();
+            File imageDirectory = null;
+            if (os.contains("windows")) {
+                imageDirectory = new File("C:\\workspace\\images\\" + dir);
+            } else if (os.contains("linux")) {
+                imageDirectory = new File("/dev/sda/" + dir);
+            } else {
+                throw new RuntimeException("saveImage method in " + os + " not supported.");
+            }
+
             // 디렉토리가 존재하지 않는다면 새로 만들기
             if (!imageDirectory.exists()) {
                 imageDirectory.mkdirs();
