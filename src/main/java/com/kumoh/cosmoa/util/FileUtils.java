@@ -34,7 +34,12 @@ public class FileUtils {
 
             StringBuilder sb = new StringBuilder();
             sb.append(imageDirectory.getAbsolutePath());
-            sb.append("\\");
+
+            if (os.contains("windows")) {
+                sb.append("\\");
+            } else if (os.contains("linux")) {
+                sb.append("/");
+            }
             sb.append(id);
             sb.append("_");
             sb.append(System.currentTimeMillis());
