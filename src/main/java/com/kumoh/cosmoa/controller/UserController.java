@@ -34,6 +34,24 @@ public class UserController {
 
 		return ResponseEntity.ok().body(response);
 	}
+	
+	@GetMapping("/isExistEmail/{email}")
+    public ResponseEntity<?> isExistEmail(@PathVariable String email) {
+    	try {
+    		UserDTO dto = userService.findUserByEmail(email);
+    		if(dto!=null)
+    		{
+    			return ResponseEntity.ok().body(ResponseDTO.builder().data("이미 존재하는 이메일 입니다.").build());
+    		}
+    		else
+    		{
+    			return ResponseEntity.ok().body(ResponseDTO.builder().data("사용 할 수 있는 이메일 입니다.").build());
+    		}    		
+    	} catch (Exception e) {
+    		return ResponseEntity.badRequest().body(ResponseDTO.builder().error(e.getMessage()).build());
+    	}
+    		
+    }
 
 	@PostMapping("")
 	public ResponseEntity<?> signUp(@RequestBody UserDTO userDto) {
