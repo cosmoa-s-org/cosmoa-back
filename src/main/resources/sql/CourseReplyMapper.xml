@@ -44,12 +44,12 @@
     
     <!-- 코스댓글수정 -->
     <update id="updateCourseReply" parameterType="com.kumoh.cosmoa.dto.CourseReplyDTO">
-    	UPDATE COURSE SET ID = #{id},
-    					USER_ID = #{user_id},
-    					COURSE_ID = #{course_id},
-    					COMMENT = #{comment},
+    	UPDATE COURSE_REPLY SET ID = #{param.id},
+    					USER_ID = #{param.userId},
+    					COURSE_ID = #{param.courseId},
+    					COMMENT = #{param.comment},
     					MODIFIED_DATE = NOW()
-    				WHERE ID = #{id}
+    				WHERE ID = #{param.id}
     </update>
     
 </mapper>

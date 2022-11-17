@@ -71,7 +71,7 @@ public class CourseReplyController {
     }
     
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateCourseReply(@PathVariable int id, CourseReplyDTO courseReplyDto) {
+    public ResponseEntity<?> updateCourseReply(@PathVariable int id, @RequestBody CourseReplyDTO courseReplyDto) {
         try {
             //    	long millis = System.currentTimeMillis();
             //      courseReplyDto.setModified_date(new Date(millis));
