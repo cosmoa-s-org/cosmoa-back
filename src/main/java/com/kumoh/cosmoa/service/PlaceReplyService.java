@@ -21,7 +21,7 @@ public class PlaceReplyService {
     }
 
     public PlaceReplyDTO insert(PlaceReplyDTO dto, MultipartFile img) {
-        String path = FileUtils.saveImage("C:\\workspace\\images\\place-reply", dto.getPlaceId() + "_" + dto.getUserId(), img);
+        String path = FileUtils.saveImage("place-reply", dto.getPlaceId() + "_" + dto.getUserId(), img);
         dto.setImgPath(path);
 
         if (placeReplyMapper.insertPlaceReply(dto) == 0) throw new RuntimeException("Insert PlaceReply failed. try again.");
@@ -41,7 +41,7 @@ public class PlaceReplyService {
 
         if (img != null) {
             FileUtils.deleteImage(dto.getImgPath());
-            String path = FileUtils.saveImage("C:\\workspace\\images\\place-reply", dto.getPlaceId() + "_" + dto.getUserId(), img);
+            String path = FileUtils.saveImage("place-reply", dto.getPlaceId() + "_" + dto.getUserId(), img);
             dto.setImgPath(path);
         }
 
