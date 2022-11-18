@@ -16,8 +16,8 @@
     </resultMap>
     
     <resultMap type="com.kumoh.cosmoa.dto.response.PlaceReplyResponseDTO" id="PlaceReplyResponseDTO">
-    	<result property="nickname" column="NICKNAME" />
-    	<result property="id" column="ID" />
+    	<result property="nickname" column="USER_NICKNAME" />
+    	<result property="id" column="PLACE_REPLY_ID" />
         <result property="userId" column="USER_ID" />
         <result property="comment" column="COMMENT" />
         <result property="imgPath" column="IMG_PATH" />
@@ -28,7 +28,7 @@
     <select id="findByPlaceId" resultMap="PlaceReplyResponseDTO">
         SELECT  PR.ID AS PLACE_REPLY_ID,
         		U.ID AS USER_ID,
-        		U.NICKNAME,
+        		U.NICKNAME AS USER_NICKNAME,
         		PR.COMMENT,
         		PR.IMG_PATH,
         		PR.CREATED_DATE,
