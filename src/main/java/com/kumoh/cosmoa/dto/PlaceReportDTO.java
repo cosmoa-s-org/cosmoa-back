@@ -14,4 +14,5 @@ public class PlaceReportDTO {
     private int placeId;
     private int userId;
     private int type;
+    private int state;
 }

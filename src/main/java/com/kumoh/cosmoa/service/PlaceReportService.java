@@ -25,7 +25,9 @@ public class PlaceReportService {
 
     public List<PlaceReportResponseDTO> findAll() {
         //log.info("PlaceReportResponseDTO : {}", placeReportMapper.findAll().get(0));
-        return placeReportMapper.findAll();
+    	List<PlaceReportResponseDTO> dtos = placeReportMapper.findAll();
+    	dtos.forEach(d -> d.loadImage());
+        return dtos;
     }
 
     public boolean delete(int reportId) {

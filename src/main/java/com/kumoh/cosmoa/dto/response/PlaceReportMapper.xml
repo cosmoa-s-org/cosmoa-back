@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kumoh.cosmoa.mapper.PlaceReportMapper">
+    <resultMap type="com.kumoh.cosmoa.dto.PlaceDTO" id="PlaceDTO">
+        <result property="id" column="ID" />
+        <result property="name" column="NAME" />
+        <result property="address" column="ADDRESS" />
+        <result property="imgPath" column="IMG_PATH" />
+        <result property="lat" column="LAT" />
+        <result property="lng" column="LNG" />
+        <result property="description" column="DESCRIPTION" />
+        <result property="createdDate" column="CREATED_DATE" />
+        <result property="modifiedDate" column="MODIFIED_DATE" />
+        <result property="userId" column="USER_ID" />
+    </resultMap>
+
+    <resultMap type="com.kumoh.cosmoa.dto.UserDTO" id="UserDTO">
+        <result property="id" column="ID" />
+        <result property="email" column="EMAIL" />
+        <result property="password" column="PASSWORD" />
+        <result property="nickname" column="NICKNAME" />
+        <result property="type" column="TYPE" />
+        <result property="gender" column="GENDER" />
+        <result property="age" column="AGE" />
+    </resultMap>
+    
+     <resultMap type="com.kumoh.cosmoa.dto.PlaceReportDTO" id="PlaceReportDTO">
+        <result property="id" column="ID" />
+        <result property="userId" column="USER_ID" />
+        <result property="placeId" column="PLACE_ID" />
+        <result property="type" column="TYPE" />
+        <result property="state" column="STATE" />
+    </resultMap>
+
+    <resultMap type="com.kumoh.cosmoa.dto.response.PlaceReportResponseDTO" id="PlaceReportResponseDTO">
+    	<result property="placeId" column="PLACE_ID" />
+        <collection property="place" resultMap="PlaceDTO" />
+        <collection property="user" resultMap="UserDTO" />
+        <collection javaType="list" column="PLACE_ID" property="placeReportList" select="selectPlaceReportList" ofType = "com.kumoh.cosmoa.dto.PlaceReportDTO"/>
+    </resultMap>
+
+
+    <select id="findAll" resultMap="PlaceReportResponseDTO">
+    	SELECT 	p.ID AS PLACE_ID,
+    			p.*,
+    			u.ID,
+    			u.EMAIL,
+    			u.NICKNAME,
+    			u.TYPE,
+    			u.GENDER,
+    			u.AGE
+    	FROM PLACE p, USER u, PLACE_REPORT pr
+    	WHERE p.USER_ID = u.ID AND pr.PLACE_ID = p.ID
+    </select>
+    
+    <select id="selectPlaceReportList" resultMap="PlaceReportDTO">
+    	SELECT 	ID,
+    			USER_ID,
+    			PLACE_ID,
+    			TYPE,
+    			STATE
+    	FROM PLACE_REPORT
+    	WHERE PLACE_ID = #{PLACE_ID}
+    </select>
+
+    <insert id="insertPlaceReport">
+        INSERT INTO PLACE_REPORT
+        ( PLACE_ID, USER_ID, TYPE )
+        VALUES ( #{param.placeId}, #{param.userId}, #{param.type} )
+    </insert>
+
+    <delete id="deletePlaceReport">
+        DELETE FROM PLACE_REPORT
+        WHERE ID=#{reportId}
+    </delete>
+</mapper>
