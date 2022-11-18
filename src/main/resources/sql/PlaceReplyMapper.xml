@@ -16,9 +16,9 @@
     </resultMap>
     
     <resultMap type="com.kumoh.cosmoa.dto.response.PlaceReplyResponseDTO" id="PlaceReplyResponseDTO">
-    	<result property="nickname" column="USER_NICKNAME" />
     	<result property="id" column="PLACE_REPLY_ID" />
         <result property="userId" column="USER_ID" />
+        <result property="nickname" column="USER_NICKNAME" />
         <result property="comment" column="COMMENT" />
         <result property="imgPath" column="IMG_PATH" />
         <result property="createdDate" column="CREATED_DATE" />

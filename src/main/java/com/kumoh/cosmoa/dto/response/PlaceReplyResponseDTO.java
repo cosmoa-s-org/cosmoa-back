@@ -29,6 +29,7 @@ public class PlaceReplyResponseDTO {
     public PlaceReplyResponseDTO(PlaceReplyResponseDTO dto) {
         this.id = dto.getId();
         this.userId = dto.getUserId();
+        this.nickname = dto.getNickname();
         this.comment = dto.getComment();
         this.createdDate = dto.getCreatedDate();
         this.modifiedDate = dto.getModifiedDate();
