@@ -56,7 +56,6 @@ public class PlaceController {
                                     @RequestParam("address") String address,
                                     @RequestParam("lat") String lat,
                                     @RequestParam("lng") String lng,
-                                    @RequestParam("userId") int userId,
                                     @RequestParam(value = "img", required = false) MultipartFile img) {
         log.info("img: {}", img != null);
         try {
@@ -67,7 +66,6 @@ public class PlaceController {
                     .address(address)
                     .lat(lat)
                     .lng(lng)
-                    .userId(userId)
                     .build();
             placeService.update(dto, img);
             return ResponseEntity.ok().body(dto);
