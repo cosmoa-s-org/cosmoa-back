@@ -41,7 +41,7 @@
         <result property="placeId" column="PLACE_ID" />
         <collection property="place" resultMap="PlaceDTO" />
         <collection property="user" resultMap="UserDTO" />
-        <collection javaType="list" column="PLACE_ID" property="placeReportUserList" select="selectPlaceReportUserList" ofType = "com.kumoh.cosmoa.dto.PlaceReportUserDTO"/>
+        <collection column="PLACE_ID" property="placeReportUserList" select="selectPlaceReportUserList" ofType="com.kumoh.cosmoa.dto.PlaceReportUserDTO"/>
     </resultMap>
 
 

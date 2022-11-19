@@ -13,6 +13,7 @@ public interface CourseMapper {
 
     List<CourseDTO> getCourseList();
     List<CourseResponseDTO> getCourseResponseList();
+    List<CourseResponseDTO> getHotCourseResponseList(); 
     CourseDetailResponseDTO getCourseDetail(@Param("courseId") int courseId,
                                             @Param("userId") int userId);
     int createCourse(CourseDTO courseDto);

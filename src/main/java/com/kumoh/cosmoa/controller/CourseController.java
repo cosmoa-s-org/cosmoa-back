@@ -39,6 +39,21 @@ public class CourseController {
             return ResponseEntity.badRequest().body(ResponseDTO.builder().error(e.getMessage()).build());
         }
     }
+    
+    @GetMapping("/hot")
+    public ResponseEntity<?> getHotCourseList() {
+        try {
+//            List<CourseDTO> dtos = courseService.findAll();
+//            ResponseDTO<List<CourseDTO>> response = ResponseDTO.<List<CourseDTO>>builder().data(dtos).build();
+            List<CourseResponseDTO> dtos = courseService.findHotCourseResponseList();
+            ResponseDTO<List<CourseResponseDTO>> response = ResponseDTO.<List<CourseResponseDTO>>builder().data(dtos).build();
+
+            return ResponseEntity.ok().body(response);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(ResponseDTO.builder().error(e.getMessage()).build());
+        }
+    }
+    
 
     @GetMapping("/detail")
     public ResponseEntity<?> getCourseDetail(@RequestParam("courseId") int courseId,

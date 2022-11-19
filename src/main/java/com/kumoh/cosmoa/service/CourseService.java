@@ -25,6 +25,10 @@ public class CourseService {
     public List<CourseResponseDTO> findCourseResponseList() {
         return courseMapper.getCourseResponseList();
     }
+    
+    public List<CourseResponseDTO> findHotCourseResponseList() {
+    	return courseMapper.getHotCourseResponseList();
+    }
 
     public CourseDetailResponseDTO findCourseDetail(int courseId, int userId) {
         return courseMapper.getCourseDetail(courseId, userId);
