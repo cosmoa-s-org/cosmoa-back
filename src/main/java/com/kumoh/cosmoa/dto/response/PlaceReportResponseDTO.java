@@ -6,7 +6,7 @@ import java.nio.file.Paths;
 import java.util.List;
 
 import com.kumoh.cosmoa.dto.PlaceDTO;
-import com.kumoh.cosmoa.dto.PlaceReportDTO;
+import com.kumoh.cosmoa.dto.PlaceReportUserDTO;
 import com.kumoh.cosmoa.dto.UserDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 public class PlaceReportResponseDTO {
     private PlaceDTO place;
     private UserDTO user;
-    private List<PlaceReportDTO> placeReportList;
+    private List<PlaceReportUserDTO> placeReportUserList;
     private byte[] image;
     private int placeId;
     

@@ -27,19 +27,21 @@
         <result property="age" column="AGE" />
     </resultMap>
 
-    <resultMap type="com.kumoh.cosmoa.dto.PlaceReportDTO" id="PlaceReportDTO">
+    <resultMap type="com.kumoh.cosmoa.dto.PlaceReportUserDTO" id="PlaceReportUserDTO">
         <result property="id" column="ID" />
         <result property="userId" column="USER_ID" />
         <result property="placeId" column="PLACE_ID" />
         <result property="type" column="TYPE" />
         <result property="state" column="STATE" />
+        <result property="nickname" column="NICKNAME"/>
+        <result property="email" column="EMAIL"/>
     </resultMap>
 
     <resultMap type="com.kumoh.cosmoa.dto.response.PlaceReportResponseDTO" id="PlaceReportResponseDTO">
         <result property="placeId" column="PLACE_ID" />
         <collection property="place" resultMap="PlaceDTO" />
         <collection property="user" resultMap="UserDTO" />
-        <collection javaType="list" column="PLACE_ID" property="placeReportList" select="selectPlaceReportList" ofType = "com.kumoh.cosmoa.dto.PlaceReportDTO"/>
+        <collection javaType="list" column="PLACE_ID" property="placeReportUserList" select="selectPlaceReportUserList" ofType = "com.kumoh.cosmoa.dto.PlaceReportUserDTO"/>
     </resultMap>
 
 
@@ -56,14 +58,16 @@
         WHERE p.USER_ID = u.ID AND pr.PLACE_ID = p.ID
     </select>
 
-    <select id="selectPlaceReportList" resultMap="PlaceReportDTO">
-        SELECT 	ID,
-        USER_ID,
-        PLACE_ID,
-        TYPE,
-        STATE
-        FROM PLACE_REPORT
-        WHERE PLACE_ID = #{PLACE_ID}
+    <select id="selectPlaceReportUserList" resultMap="PlaceReportUserDTO">
+        SELECT 	pr.ID,
+        		pr.USER_ID,
+        		pr.PLACE_ID,
+        		pr.TYPE,
+        		pr.STATE,
+        		u.NICKNAME,
+        		u.EMAIL
+        FROM PLACE_REPORT pr, USER u 
+        WHERE pr.PLACE_ID = #{PLACE_ID} AND u.ID = pr.USER_ID
     </select>
 
     <insert id="insertPlaceReport">
