@@ -2,6 +2,7 @@ package com.kumoh.cosmoa.controller;
 
 import com.kumoh.cosmoa.dto.CourseReportDTO;
 import com.kumoh.cosmoa.dto.ResponseDTO;
+import com.kumoh.cosmoa.dto.response.CourseReportResponseDTO;
 import com.kumoh.cosmoa.service.CourseReportService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -28,8 +29,8 @@ public class CourseReportController {
     @GetMapping("")
     public ResponseEntity<?> getCourseReportList() {
         try {
-            List<CourseReportDTO> dtos = courseReportService.findAll();
-            ResponseDTO<List<CourseReportDTO>> response = ResponseDTO.<List<CourseReportDTO>>builder().data(dtos).build();
+            List<CourseReportResponseDTO> dtos = courseReportService.findAll();
+            ResponseDTO<List<CourseReportResponseDTO>> response = ResponseDTO.<List<CourseReportResponseDTO>>builder().data(dtos).build();
 
             return ResponseEntity.ok().body(response);
         } catch (Exception e) {
@@ -42,8 +43,14 @@ public class CourseReportController {
     public ResponseEntity<?> createCourseReport(CourseReportDTO courseReportDto) {
         try {
             int result = courseReportService.createCourseReport(courseReportDto);
-
-            return ResponseEntity.ok().body(ResponseDTO.builder().data("Create course report done.").build());
+            if(result==1)
+            {
+            	return ResponseEntity.ok().body(ResponseDTO.builder().data("코스 신고 등록 성공.").build());            	
+            }
+            else
+            {
+            	return ResponseEntity.ok().body(ResponseDTO.builder().data("코스 신고 등록 실패.").build());            	
+            }
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(ResponseDTO.builder().error(e.getMessage()).build());
         }
@@ -54,8 +61,15 @@ public class CourseReportController {
         try {
             courseReportDto.setId(id);
             int result = courseReportService.updateCourseReport(courseReportDto);
+            if(result==1)
+            {
+            	return ResponseEntity.ok().body(ResponseDTO.builder().data("코스 신고 수정 성공.").build());            	
+            }
+            else
+            {
+            	return ResponseEntity.ok().body(ResponseDTO.builder().data("코스 신고 수정 실패.").build());            	
+            }
 
-            return ResponseEntity.ok().body(ResponseDTO.builder().data("Update course report done.").build());
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(ResponseDTO.builder().error(e.getMessage()).build());
         }
@@ -66,8 +80,17 @@ public class CourseReportController {
     public ResponseEntity<?> deleteCourseReport(@PathVariable int id) {
         try {
             int result = courseReportService.deleteCourseReport(id);
+            if(result==1)
+            {
+            	return ResponseEntity.ok().body(ResponseDTO.builder().data("코스 신고 삭제 성공.").build());
+            }
+            else
+            {
+            	{
+                	return ResponseEntity.ok().body(ResponseDTO.builder().data("코스 신고 삭제 실패.").build());
+                }
+            }
 
-            return ResponseEntity.ok().body(ResponseDTO.builder().data("Delete course report done.").build());
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(ResponseDTO.builder().error(e.getMessage()).build());
         }

@@ -4,13 +4,74 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.kumoh.cosmoa.mapper.CourseReportMapper">
-    <select id="getCourseReportList" resultType="com.kumoh.cosmoa.dto.CourseReportDTO">
+    <resultMap type="com.kumoh.cosmoa.dto.CourseDTO" id="CourseDTO">
+    	<result property="id" column="ID" />
+        <result property="name" column="NAME" />
+        <result property="description" column="DESCRIPTION" />
+        <result property="createdDate" column="CREATED_DATE" />
+        <result property="modifiedDate" column="MODIFIED_DATE" />
+        <result property="userId" column="USER_ID" />
+    </resultMap>
+    
+    <resultMap type="com.kumoh.cosmoa.dto.UserDTO" id="UserDTO">
+        <result property="id" column="ID" />
+        <result property="email" column="EMAIL" />
+        <result property="password" column="PASSWORD" />
+        <result property="nickname" column="NICKNAME" />
+        <result property="type" column="TYPE" />
+        <result property="gender" column="GENDER" />
+        <result property="age" column="AGE" />
+    </resultMap>
+    
+    <resultMap type="com.kumoh.cosmoa.dto.CourseReportUserDTO" id="CourseReportUserDTO">
+        <result property="id" column="ID" />
+        <result property="userId" column="USER_ID" />
+        <result property="courseId" column="COURSE_ID" />
+        <result property="type" column="TYPE" />
+        <result property="state" column="STATE" />
+        <result property="nickname" column="NICKNAME"/>
+        <result property="email" column="EMAIL"/>
+    </resultMap>
+    
+    <resultMap type="com.kumoh.cosmoa.dto.response.CourseReportResponseDTO" id="CourseReportResponseDTO">
+        <result property="courseId" column="COURSE_ID" />
+        <collection property="course" resultMap="CourseDTO" />
+        <collection property="user" resultMap="UserDTO" />
+        <collection javaType="list" column="COURSE_ID" property="courseReportUserList" select="selectCourseReportUserList" ofType = "com.kumoh.cosmoa.dto.CourseReportUserDTO"/>
+    </resultMap>
+    
+    <select id="findAll" resultMap="CourseReportResponseDTO">
+        SELECT 	c.ID AS COURSE_ID,
+        c.*,
+        u.ID,
+        u.EMAIL,
+        u.NICKNAME,
+        u.TYPE,
+        u.GENDER,
+        u.AGE
+        FROM COURSE c, USER u, COURSE_REPORT cr
+        WHERE c.USER_ID = u.ID AND cr.COURSE_ID = c.ID
+    </select>
+
+    <select id="selectCourseReportUserList" resultMap="CourseReportUserDTO">
+        SELECT 	cr.ID,
+        		cr.USER_ID,
+        		cr.COURSE_ID,
+        		cr.TYPE,
+        		cr.STATE,
+        		u.NICKNAME,
+        		u.EMAIL
+        FROM COURSE_REPORT cr, USER u 
+        WHERE cr.COURSE_ID = #{COURSE_ID} AND u.ID = cr.USER_ID
+    </select>
+    
+    <!--<select id="getCourseReportList" resultType="com.kumoh.cosmoa.dto.CourseReportDTO">
         SELECT  ID,
                 USER_ID,
                 COURSE_ID,
                 TYPE
         FROM COURSE_REPORT
-    </select>
+    </select> -->
     <!-- 코스신고 -->
     <insert id="createCourseReport" parameterType="com.kumoh.cosmoa.dto.CourseReportDTO" useGeneratedKeys="true"
     keyProperty="id">
@@ -24,7 +85,7 @@
     
     <!-- 코스신고취소 -->
     <delete id="deleteCourseReport" parameterType="int">
-    	DELETE FROM COURSE_REPLY WHERE ID = #{id}
+    	DELETE FROM COURSE_REPORT WHERE ID = #{id}
     </delete>
     
     <!-- 코스신고수정 -->

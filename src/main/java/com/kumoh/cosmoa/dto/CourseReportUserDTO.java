@@ -9,10 +9,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class CourseReportDTO {
+public class CourseReportUserDTO {
     private int id;
-    private int userId;
     private int courseId;
+    private int userId;
     private int type;
     private int state;
+    private String nickname;
+    private String email;
 }
