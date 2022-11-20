@@ -56,7 +56,7 @@ public class PlaceService {
                 .address("유저의 요청으로 삭제된 장소")
                 .build();
 
-        if (placeMapper.updatePlace(dto) == 0) throw new RuntimeException("Delete failed. try again.");
+        if (placeMapper.updatePlace(deleted) == 0) throw new RuntimeException("Delete failed. try again.");
 
         return true;
     }
