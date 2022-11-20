@@ -33,4 +33,8 @@ public class PlaceReportService {
     public boolean delete(int reportId) {
         return placeReportMapper.deletePlaceReport(reportId) == 1;
     }
+    
+    public boolean update(PlaceReportDTO dto) {
+    	return placeReportMapper.updatePlaceReport(dto) == 1;
+    }
 }

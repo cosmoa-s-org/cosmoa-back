@@ -72,10 +72,16 @@
 
     <insert id="insertPlaceReport">
         INSERT INTO PLACE_REPORT
-        ( PLACE_ID, USER_ID, TYPE )
-        VALUES ( #{param.placeId}, #{param.userId}, #{param.type} )
+        ( PLACE_ID, USER_ID, TYPE, STATE )
+        VALUES ( #{param.placeId}, #{param.userId}, #{param.type}, #{param.state} )
     </insert>
-
+    
+    <update id="updatePlaceReport">
+    	UPDATE PLACE_REPORT SET 
+    					STATE = #{state}
+    				WHERE ID = #{id}
+    </update>
+    
     <delete id="deletePlaceReport">
         DELETE FROM PLACE_REPORT
         WHERE ID=#{reportId}

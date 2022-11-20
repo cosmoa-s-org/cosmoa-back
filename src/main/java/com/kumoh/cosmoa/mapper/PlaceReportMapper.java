@@ -12,4 +12,5 @@ public interface PlaceReportMapper {
     List<PlaceReportResponseDTO> findAll();
     int insertPlaceReport(@Param("param")PlaceReportDTO dto);
     int deletePlaceReport(@Param("reportId") int reportId);
+    int updatePlaceReport(PlaceReportDTO dto);
 }
