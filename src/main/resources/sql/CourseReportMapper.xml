@@ -76,11 +76,10 @@
     <insert id="createCourseReport" parameterType="com.kumoh.cosmoa.dto.CourseReportDTO" useGeneratedKeys="true"
     keyProperty="id">
     	INSERT INTO COURSE_REPORT(
-     					ID,
                 		USER_ID,
                 		COURSE_ID,
                 		TYPE,
-                		STATE
+                		STATE)
      	VALUES(#{id}, #{userId}, #{courseId}, #{type}, #{state})
     </insert>
     
