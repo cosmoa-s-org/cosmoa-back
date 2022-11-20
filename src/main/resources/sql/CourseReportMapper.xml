@@ -80,7 +80,7 @@
                 		COURSE_ID,
                 		TYPE,
                 		STATE)
-     	VALUES(#{id}, #{userId}, #{courseId}, #{type}, 1)
+     	VALUES(#{userId}, #{courseId}, #{type}, 1)
     </insert>
     
     <!-- 코스신고취소 -->
