@@ -79,8 +79,9 @@
      					ID,
                 		USER_ID,
                 		COURSE_ID,
-                		TYPE
-     	VALUES(#{id}, #{user_id}, #{course_id}, #{type})
+                		TYPE,
+                		STATE
+     	VALUES(#{id}, #{user_id}, #{course_id}, #{type}, #{state})
     </insert>
     
     <!-- 코스신고취소 -->
@@ -93,7 +94,9 @@
     	UPDATE COURSE_REPORT SET ID = #{id},
     					USER_ID = #{user_id},
     					COURSE_ID = #{course_id},
-    					TYPE = #{type}
+    					TYPE = #{type},
+    					STATE = #{state}
+    					
     				WHERE ID = #{id}
     </update>
     
