@@ -39,11 +39,11 @@ public class PlaceReportController {
             boolean result = placeReportService.update(dto);
             if(result==true)
             {
-            	return ResponseEntity.ok().body(ResponseDTO.builder().data("코스 신고 수정 성공.").build());            	
+            	return ResponseEntity.ok().body(ResponseDTO.builder().data("장소 신고 수정 성공.").build());            	
             }
             else
             {
-            	return ResponseEntity.ok().body(ResponseDTO.builder().data("코스 신고 수정 실패.").build());            	
+            	return ResponseEntity.ok().body(ResponseDTO.builder().data("장소 신고 수정 실패.").build());            	
             }
 
         } catch (Exception e) {
@@ -66,11 +66,11 @@ public class PlaceReportController {
     		//dtos.forEach(d -> placeReportService.update(d));
             if(result>0)
             {
-            	return ResponseEntity.ok().body(ResponseDTO.builder().data(result + "개의 코스 신고 수정 성공.").build());            	
+            	return ResponseEntity.ok().body(ResponseDTO.builder().data(result + "개의 장소 신고 수정 성공.").build());            	
             }
             else
             {
-            	return ResponseEntity.ok().body(ResponseDTO.builder().data("코스 신고 수정 실패.").build());            	
+            	return ResponseEntity.ok().body(ResponseDTO.builder().data("장소 신고 수정 실패.").build());            	
             }
 
         } catch (Exception e) {

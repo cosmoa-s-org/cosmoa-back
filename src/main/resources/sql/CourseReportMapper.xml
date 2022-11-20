@@ -91,13 +91,10 @@
     
     <!-- 코스신고수정 -->
     <update id="updateCourseReport" parameterType="com.kumoh.cosmoa.dto.CourseReportDTO">
-    	UPDATE COURSE_REPORT SET ID = #{id},
-    					USER_ID = #{user_id},
-    					COURSE_ID = #{course_id},
-    					TYPE = #{type},
-    					STATE = #{state}
+    	UPDATE 	COURSE_REPORT SET 
+    			STATE = #{state}
     					
-    				WHERE ID = #{id}
+    	WHERE 	ID = #{id}
     </update>
     
 </mapper>

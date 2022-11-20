@@ -1,6 +1,7 @@
 package com.kumoh.cosmoa.controller;
 
 import com.kumoh.cosmoa.dto.CourseReportDTO;
+import com.kumoh.cosmoa.dto.PlaceReportDTO;
 import com.kumoh.cosmoa.dto.ResponseDTO;
 import com.kumoh.cosmoa.dto.response.CourseReportResponseDTO;
 import com.kumoh.cosmoa.service.CourseReportService;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -56,7 +58,7 @@ public class CourseReportController {
         }
     }
     
-    @PutMapping("/{id}")
+    /*@PutMapping("/{id}")
     public ResponseEntity<?> updateCourseReport(@PathVariable int id, CourseReportDTO courseReportDto) {
         try {
             courseReportDto.setId(id);
@@ -74,6 +76,51 @@ public class CourseReportController {
             return ResponseEntity.badRequest().body(ResponseDTO.builder().error(e.getMessage()).build());
         }
 
+    }*/
+    
+    @PutMapping("/{reportId}")
+    public ResponseEntity<?> update(@PathVariable int reportId, @RequestBody CourseReportDTO dto) {
+    	try {
+            dto.setId(reportId);
+            int result = courseReportService.updateCourseReport(dto);
+            if(result==1)
+            {
+            	return ResponseEntity.ok().body(ResponseDTO.builder().data("코스 신고 수정 성공.").build());            	
+            }
+            else
+            {
+            	return ResponseEntity.ok().body(ResponseDTO.builder().data("코스 신고 수정 실패.").build());            	
+            }
+
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(ResponseDTO.builder().error(e.getMessage()).build());
+        }
+    }
+    
+    @PostMapping("/bulk-update")
+    public ResponseEntity<?> bulkUpdate(@RequestBody List<CourseReportDTO> dtos) {
+    	try {
+    		int result = 0;
+    		for(int i = 0; i < dtos.size(); i++)
+    		{
+    			if(courseReportService.updateCourseReport(dtos.get(i))==1)
+    			{
+    				result++;
+    			}
+    		}
+    		//dtos.forEach(d -> courseReportService.update(d));
+            if(result>0)
+            {
+            	return ResponseEntity.ok().body(ResponseDTO.builder().data(result + "개의 코스 신고 수정 성공.").build());            	
+            }
+            else
+            {
+            	return ResponseEntity.ok().body(ResponseDTO.builder().data("코스 신고 수정 실패.").build());            	
+            }
+
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(ResponseDTO.builder().error(e.getMessage()).build());
+        }
     }
     
     @DeleteMapping("/{id}")
