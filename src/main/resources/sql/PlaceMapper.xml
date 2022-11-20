@@ -72,6 +72,7 @@
         FROM    PLACE
         WHERE   NAME LIKE CONCAT('%', #{search}, '%')
         OR      ADDRESS LIKE CONCAT('%', #{search}, '%')
+        AND     NAME NOT LIKE CONCAT('%', 삭제된 장소, '%')
     </select>
 
     <select id="getPlace" resultMap="PlaceDTO">

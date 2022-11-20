@@ -48,7 +48,15 @@ public class PlaceService {
         PlaceDTO dto = placeMapper.getPlace(id);
         FileUtils.deleteImage(dto.getImgPath());
 
-        if (placeMapper.deletePlace(dto) == 0) throw new RuntimeException("Delete failed. try again.");
+        PlaceDTO deleted = PlaceDTO.builder()
+                .name("유저의 요청으로 삭제된 장소")
+                .description("유저의 요청으로 삭제된 장소입니다.")
+                .lat("0")
+                .lng("0")
+                .address("유저의 요청으로 삭제된 장소")
+                .build();
+
+        if (placeMapper.updatePlace(dto) == 0) throw new RuntimeException("Delete failed. try again.");
 
         return true;
     }
