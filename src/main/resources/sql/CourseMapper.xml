@@ -68,7 +68,7 @@
         FROM COURSE c, COMPOSE cp, PLACE p, USER u
         WHERE   cp.COURSE_ID = c.ID
         AND     cp.PLACE_ID = p.ID
-        AND     cp.SEQUENCE = 1
+        AND     cp.${SEQUENCE} = 1
         AND     c.USER_ID = u.ID
         HAVING  <![CDATA[DIST <= 10]]>
         ORDER BY `ID` DESC
