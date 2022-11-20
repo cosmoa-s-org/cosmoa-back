@@ -62,7 +62,7 @@
         		u.NICKNAME,
         		u.EMAIL
         FROM COURSE_REPORT cr, USER u 
-        WHERE cr.COURSE_ID = #{COURSE_ID} AND u.ID = cr.USER_ID AND cr.STATE='1'
+        WHERE cr.COURSE_ID = #{courseId} AND u.ID = cr.USER_ID AND cr.STATE='1'
     </select>
     
     <!--<select id="getCourseReportList" resultType="com.kumoh.cosmoa.dto.CourseReportDTO">
@@ -81,7 +81,7 @@
                 		COURSE_ID,
                 		TYPE,
                 		STATE
-     	VALUES(#{id}, #{user_id}, #{course_id}, #{type}, #{state})
+     	VALUES(#{id}, #{userId}, #{courseId}, #{type}, #{state})
     </insert>
     
     <!-- 코스신고취소 -->

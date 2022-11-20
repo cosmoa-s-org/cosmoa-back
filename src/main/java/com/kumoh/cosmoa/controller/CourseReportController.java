@@ -42,7 +42,7 @@ public class CourseReportController {
     }
     
     @PostMapping("")
-    public ResponseEntity<?> createCourseReport(CourseReportDTO courseReportDto) {
+    public ResponseEntity<?> createCourseReport(@RequestBody CourseReportDTO courseReportDto) {
         try {
             int result = courseReportService.createCourseReport(courseReportDto);
             if(result==1)
