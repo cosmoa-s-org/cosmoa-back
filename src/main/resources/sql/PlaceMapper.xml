@@ -70,9 +70,8 @@
 <!--        CREATED_DATE,-->
 <!--        MODIFIED_DATE-->
         FROM    PLACE
-        WHERE   NAME LIKE CONCAT('%', #{search}, '%')
-        OR      ADDRESS LIKE CONCAT('%', #{search}, '%')
-        AND     NAME NOT LIKE CONCAT('%', '삭제된 장소', '%')
+        WHERE   (NAME LIKE CONCAT('%', #{search}, '%') AND NAME NOT LIKE CONCAT('%', '삭제된 장소', '%'))
+        OR      (ADDRESS LIKE CONCAT('%', #{search}, '%') AND NAME NOT LIKE CONCAT('%', '삭제된 장소', '%'))
     </select>
 
     <select id="getPlace" resultMap="PlaceDTO">
