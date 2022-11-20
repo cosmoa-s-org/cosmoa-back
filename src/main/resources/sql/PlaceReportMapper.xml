@@ -73,7 +73,7 @@
     <insert id="insertPlaceReport">
         INSERT INTO PLACE_REPORT
         ( PLACE_ID, USER_ID, TYPE, STATE )
-        VALUES ( #{param.placeId}, #{param.userId}, #{param.type}, #{param.state} )
+        VALUES ( #{param.placeId}, #{param.userId}, #{param.type}, 1 )
     </insert>
     
     <update id="updatePlaceReport">
