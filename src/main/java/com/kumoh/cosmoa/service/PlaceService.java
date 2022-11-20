@@ -49,6 +49,7 @@ public class PlaceService {
         FileUtils.deleteImage(dto.getImgPath());
 
         PlaceDTO deleted = PlaceDTO.builder()
+                .id(id)
                 .name("유저의 요청으로 삭제된 장소")
                 .description("유저의 요청으로 삭제된 장소입니다.")
                 .lat("0")
