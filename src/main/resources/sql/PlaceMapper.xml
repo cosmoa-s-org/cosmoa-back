@@ -64,9 +64,9 @@
         NAME,
         ADDRESS,
         LAT,
-        LNG
+        LNG,
+        DESCRIPTION
 <!--        IMG_PATH,-->
-<!--        DESCRIPTION,-->
 <!--        CREATED_DATE,-->
 <!--        MODIFIED_DATE-->
         FROM    PLACE
