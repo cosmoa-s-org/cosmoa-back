@@ -65,7 +65,7 @@
         (6371*acos(cos(radians(#{lat}))*cos(radians(LAT))*cos(radians(LNG)-radians(#{lng}))+sin(radians(#{lat}))*sin(radians(LAT)))) AS DIST
         (select count(*) from COURSE_LIKE cl  WHERE cl.COURSE_ID = c.ID) AS `LIKE`,
         (select count(*) from COURSE_REPLY cr WHERE cr.COURSE_ID = c.ID) AS `REPLY_COUNT`
-        FROM COURSE c, COMPOSE cp, PLACE p, USER u,
+        FROM COURSE c, COMPOSE cp, PLACE p, USER u
         WHERE   cp.COURSE_ID = c.ID
         AND     cp.PLACE_ID = p.ID
         AND     cp.SEQUENCE = 1

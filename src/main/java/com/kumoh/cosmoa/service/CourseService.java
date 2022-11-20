@@ -30,9 +30,13 @@ public class CourseService {
     	return courseMapper.getHotCourseResponseList();
     }
 
+    public List<CourseResponseDTO> searchByLatLng(String lat, String lng) {
+        return courseMapper.searchByLatLng(lat, lng);
+    }
     public CourseDetailResponseDTO findCourseDetail(int courseId, int userId) {
         return courseMapper.getCourseDetail(courseId, userId);
     }
+
     
     public int createCourse(CourseDTO courseDto) {
         courseMapper.createCourse(courseDto);
@@ -46,4 +50,6 @@ public class CourseService {
     public int updateCourse(CourseDTO courseDto) {
     	return courseMapper.updateCourse(courseDto);
     }
+
+
 }
