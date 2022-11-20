@@ -62,7 +62,7 @@
         		u.NICKNAME,
         		u.EMAIL
         FROM COURSE_REPORT cr, USER u 
-        WHERE cr.COURSE_ID = #{COURSE_ID} AND u.ID = cr.USER_ID
+        WHERE cr.COURSE_ID = #{COURSE_ID} AND u.ID = cr.USER_ID AND cr.STATE='1'
     </select>
     
     <!--<select id="getCourseReportList" resultType="com.kumoh.cosmoa.dto.CourseReportDTO">

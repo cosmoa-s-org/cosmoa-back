@@ -67,7 +67,7 @@
         		u.NICKNAME,
         		u.EMAIL
         FROM PLACE_REPORT pr, USER u 
-        WHERE pr.PLACE_ID = #{PLACE_ID} AND u.ID = pr.USER_ID
+        WHERE pr.PLACE_ID = #{PLACE_ID} AND u.ID = pr.USER_ID AND pr.STATE = '1'
     </select>
 
     <insert id="insertPlaceReport">
