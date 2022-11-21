@@ -2,7 +2,10 @@ plugins {
 	id 'org.springframework.boot' version '2.7.5'
 	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
 	id 'java'
+
 }
+
+apply plugin: 'war'
 
 group = 'com.kumoh'
 version = '0.0.1-SNAPSHOT'
@@ -12,6 +15,12 @@ configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
 	}
+}
+
+bootWar {
+	archiveBaseName = 'cosmoa' // <--war 패키징 시 이름 설정
+	archiveFileName = 'cosmoa.war' //<--war 패키징 시 이름 설정
+	archiveVersion = "1.0.0"
 }
 
 repositories {
