@@ -3,6 +3,7 @@ package com.kumoh.cosmoa.service;
 import com.kumoh.cosmoa.dto.PlaceDTO;
 import com.kumoh.cosmoa.dto.response.PlaceDetailResponseDTO;
 import com.kumoh.cosmoa.dto.response.PlaceResponseDTO;
+import com.kumoh.cosmoa.dto.response.PlaceTableResponseDTO;
 import com.kumoh.cosmoa.mapper.PlaceMapper;
 import com.kumoh.cosmoa.util.FileUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -42,6 +43,18 @@ public class PlaceService {
         if (placeMapper.updatePlace(dto) == 0) throw new RuntimeException("Update Place failed. try again.");
 
         return null;
+    }
+    
+    public List<PlaceTableResponseDTO> findScrapedPlaceResponseList(int userId) {
+    	List<PlaceTableResponseDTO> dtos = placeMapper.getScrapedPlaceResponseList(userId);
+    	
+    	return dtos;
+    }
+    
+    public List<PlaceTableResponseDTO> findPostedPlaceResponseList(int userId) {
+    	List<PlaceTableResponseDTO> dtos = placeMapper.getPostedPlaceResponseList(userId);
+    	
+    	return dtos;
     }
 
     public boolean delete(int id) {
