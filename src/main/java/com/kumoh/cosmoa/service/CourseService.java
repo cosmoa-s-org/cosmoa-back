@@ -31,6 +31,14 @@ public class CourseService {
     public List<CourseResponseDTO> findHotCourseResponseList() {
     	return courseMapper.getHotCourseResponseList();
     }
+    
+    public List<CourseResponseDTO> findScrapedCourseResponseList(int userId) {
+    	return courseMapper.getScrapedCourseResponseList(userId);
+    }
+    
+    public List<CourseResponseDTO> findPostedCourseResponseList(int userId) {
+    	return courseMapper.getPostedCourseResponseList(userId);
+    }
 
     public List<CourseResponseDTO> searchByLatLng(String lat, String lng) {
         log.info("lat: {}, lng: {}", lat, lng);

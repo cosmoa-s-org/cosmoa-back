@@ -37,11 +37,34 @@ public class CourseController {
             return ResponseEntity.badRequest().body(ResponseDTO.builder().error(e.getMessage()).build());
         }
     }
-    
     @GetMapping("/hot")
     public ResponseEntity<?> getHotCourseList() {
         try {
             List<CourseResponseDTO> dtos = courseService.findHotCourseResponseList();
+            ResponseDTO<List<CourseResponseDTO>> response = ResponseDTO.<List<CourseResponseDTO>>builder().data(dtos).build();
+
+            return ResponseEntity.ok().body(response);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(ResponseDTO.builder().error(e.getMessage()).build());
+        }
+    }
+    
+    @GetMapping("/scraped-course")
+    public ResponseEntity<?> getScrapedCourseList(@RequestParam("userId") int userId) {
+        try {
+            List<CourseResponseDTO> dtos = courseService.findScrapedCourseResponseList(userId);
+            ResponseDTO<List<CourseResponseDTO>> response = ResponseDTO.<List<CourseResponseDTO>>builder().data(dtos).build();
+
+            return ResponseEntity.ok().body(response);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(ResponseDTO.builder().error(e.getMessage()).build());
+        }
+    }
+    
+    @GetMapping("/posted-course")
+    public ResponseEntity<?> getPostedCourseList(@RequestParam("userId") int userId) {
+        try {
+            List<CourseResponseDTO> dtos = courseService.findPostedCourseResponseList(userId);
             ResponseDTO<List<CourseResponseDTO>> response = ResponseDTO.<List<CourseResponseDTO>>builder().data(dtos).build();
 
             return ResponseEntity.ok().body(response);
