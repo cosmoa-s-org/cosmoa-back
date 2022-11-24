@@ -3,6 +3,7 @@ package com.kumoh.cosmoa.controller;
 import com.kumoh.cosmoa.dto.*;
 import com.kumoh.cosmoa.dto.request.CourseRequestDTO;
 import com.kumoh.cosmoa.dto.response.CourseDetailResponseDTO;
+import com.kumoh.cosmoa.dto.response.CourseLocationResponseDTO;
 import com.kumoh.cosmoa.dto.response.CourseResponseDTO;
 import com.kumoh.cosmoa.service.CourseComposeService;
 import com.kumoh.cosmoa.service.CourseService;
@@ -76,10 +77,19 @@ public class CourseController {
     @GetMapping("/location")
     public ResponseEntity<?> searchByLatLng(@RequestParam("lat") String lat,
                                             @RequestParam("lng") String lng) {
-        try {
+        /*try {
             List<CourseResponseDTO> dtos = courseService.searchByLatLng(lat, lng);
             ResponseDTO<List<CourseResponseDTO>> response = ResponseDTO.<List<CourseResponseDTO>>builder().data(dtos).build();
 
+            return ResponseEntity.ok().body(response);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(ResponseDTO.builder().error(e.getMessage()).build());
+        }
+        */
+    	try {
+            List<CourseLocationResponseDTO> dtos = courseService.getCourseByLatlng(lat, lng);
+            ResponseDTO<List<CourseLocationResponseDTO>> response = ResponseDTO.<List<CourseLocationResponseDTO>>builder().data(dtos).build();
+            
             return ResponseEntity.ok().body(response);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(ResponseDTO.builder().error(e.getMessage()).build());

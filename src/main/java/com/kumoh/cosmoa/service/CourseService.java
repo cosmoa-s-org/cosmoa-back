@@ -2,6 +2,7 @@ package com.kumoh.cosmoa.service;
 
 import com.kumoh.cosmoa.dto.CourseDTO;
 import com.kumoh.cosmoa.dto.response.CourseDetailResponseDTO;
+import com.kumoh.cosmoa.dto.response.CourseLocationResponseDTO;
 import com.kumoh.cosmoa.dto.response.CourseResponseDTO;
 import com.kumoh.cosmoa.mapper.CourseMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -44,6 +45,11 @@ public class CourseService {
         log.info("lat: {}, lng: {}", lat, lng);
         return courseMapper.searchByLatLng(lat, lng);
     }
+    
+    public List<CourseLocationResponseDTO> getCourseByLatlng(String lat, String lng) {
+    	return courseMapper.getCourseByLatlng(lat, lng);
+    }
+    
     public CourseDetailResponseDTO findCourseDetail(int courseId, int userId) {
         return courseMapper.getCourseDetail(courseId, userId);
     }
