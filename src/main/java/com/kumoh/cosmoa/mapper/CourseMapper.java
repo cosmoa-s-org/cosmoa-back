@@ -12,11 +12,11 @@ import java.util.List;
 @Mapper
 public interface CourseMapper {
 
-    List<CourseDTO> getCourseList();
+    List<CourseLocationResponseDTO> getCourseList();
     List<CourseResponseDTO> getCourseResponseList();
     List<CourseResponseDTO> getHotCourseResponseList();
-    List<CourseResponseDTO> getScrapedCourseResponseList(@Param("userId") int userId);
-    List<CourseResponseDTO> getPostedCourseResponseList(@Param("userId") int userId);
+    List<CourseLocationResponseDTO> getScrapedCourseResponseList(@Param("userId") int userId);
+    List<CourseLocationResponseDTO> getPostedCourseResponseList(@Param("userId") int userId);
     List<CourseResponseDTO> searchByLatLng(@Param("lat") String lat,
                                            @Param("lng") String lng);
     List<CourseLocationResponseDTO> getCourseByLatlng(@Param("lat") String lat,

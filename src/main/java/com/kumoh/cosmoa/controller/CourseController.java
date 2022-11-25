@@ -30,8 +30,8 @@ public class CourseController {
     @GetMapping("")
     public ResponseEntity<?> getCourseList() {
         try {
-            List<CourseResponseDTO> dtos = courseService.findCourseResponseList();
-            ResponseDTO<List<CourseResponseDTO>> response = ResponseDTO.<List<CourseResponseDTO>>builder().data(dtos).build();
+            List<CourseLocationResponseDTO> dtos = courseService.findAll();
+            ResponseDTO<List<CourseLocationResponseDTO>> response = ResponseDTO.<List<CourseLocationResponseDTO>>builder().data(dtos).build();
 
             return ResponseEntity.ok().body(response);
         } catch (Exception e) {
@@ -53,8 +53,8 @@ public class CourseController {
     @GetMapping("/scraped-course")
     public ResponseEntity<?> getScrapedCourseList(@RequestParam("userId") int userId) {
         try {
-            List<CourseResponseDTO> dtos = courseService.findScrapedCourseResponseList(userId);
-            ResponseDTO<List<CourseResponseDTO>> response = ResponseDTO.<List<CourseResponseDTO>>builder().data(dtos).build();
+            List<CourseLocationResponseDTO> dtos = courseService.findScrapedCourseResponseList(userId);
+            ResponseDTO<List<CourseLocationResponseDTO>> response = ResponseDTO.<List<CourseLocationResponseDTO>>builder().data(dtos).build();
 
             return ResponseEntity.ok().body(response);
         } catch (Exception e) {
@@ -65,8 +65,8 @@ public class CourseController {
     @GetMapping("/posted-course")
     public ResponseEntity<?> getPostedCourseList(@RequestParam("userId") int userId) {
         try {
-            List<CourseResponseDTO> dtos = courseService.findPostedCourseResponseList(userId);
-            ResponseDTO<List<CourseResponseDTO>> response = ResponseDTO.<List<CourseResponseDTO>>builder().data(dtos).build();
+            List<CourseLocationResponseDTO> dtos = courseService.findPostedCourseResponseList(userId);
+            ResponseDTO<List<CourseLocationResponseDTO>> response = ResponseDTO.<List<CourseLocationResponseDTO>>builder().data(dtos).build();
 
             return ResponseEntity.ok().body(response);
         } catch (Exception e) {

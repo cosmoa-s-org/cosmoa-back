@@ -21,7 +21,7 @@ public class CourseService {
         this.courseMapper = courseMapper;
     }
 
-    public List<CourseDTO> findAll() {
+    public List<CourseLocationResponseDTO> findAll() {
         return courseMapper.getCourseList();
     }
 
@@ -33,11 +33,11 @@ public class CourseService {
     	return courseMapper.getHotCourseResponseList();
     }
     
-    public List<CourseResponseDTO> findScrapedCourseResponseList(int userId) {
+    public List<CourseLocationResponseDTO> findScrapedCourseResponseList(int userId) {
     	return courseMapper.getScrapedCourseResponseList(userId);
     }
     
-    public List<CourseResponseDTO> findPostedCourseResponseList(int userId) {
+    public List<CourseLocationResponseDTO> findPostedCourseResponseList(int userId) {
     	return courseMapper.getPostedCourseResponseList(userId);
     }
 
