@@ -18,6 +18,7 @@
         <result property="description" column="DESCRIPTION" />
         <result property="like" column="LIKE" />
         <result property="replyCount" column="REPLY_COUNT" />
+        <result property="reportCount" column="REPORT_COUNT" />
         
     </resultMap>
 
@@ -49,7 +50,8 @@
             u.NICKNAME,
             (6371*acos(cos(radians(#{lat}))*cos(radians(p.LAT))*cos(radians(p.LNG)-radians(#{lng}))+sin(radians(#{lat}))*sin(radians(p.LAT)))) AS `DIST`,
             (select count(*) from COURSE_LIKE cl  WHERE cl.COURSE_ID = c.ID) AS `LIKE`,
-            (select count(*) from COURSE_REPLY cr WHERE cr.COURSE_ID = c.ID) AS `REPLY_COUNT`
+            (select count(*) from COURSE_REPLY cr WHERE cr.COURSE_ID = c.ID) AS `REPLY_COUNT`,
+            (select count(*) from COURSE_REPORT cr WHERE cr.COURSE_ID = c.ID) AS `REPORT_COUNT`
         FROM COURSE c, COMPOSE cp, PLACE p, USER u
         WHERE   cp.COURSE_ID = c.ID
         AND     cp.PLACE_ID = p.ID
@@ -87,7 +89,8 @@
             c.DESCRIPTION,
             u.NICKNAME,
             (select count(*) from COURSE_LIKE cl  WHERE cl.COURSE_ID = c.ID) AS `LIKE`,
-            (select count(*) from COURSE_REPLY cr WHERE cr.COURSE_ID = c.ID) AS `REPLY_COUNT`
+            (select count(*) from COURSE_REPLY cr WHERE cr.COURSE_ID = c.ID) AS `REPLY_COUNT`,
+            (select count(*) from COURSE_REPORT cr WHERE cr.COURSE_ID = c.ID) AS `REPORT_COUNT`
         FROM COURSE c, COMPOSE cp, PLACE p, USER u
         WHERE   cp.COURSE_ID = c.ID
         AND     cp.PLACE_ID = p.ID
@@ -133,7 +136,8 @@
             c.DESCRIPTION,
             u.NICKNAME,
             (select count(*) from COURSE_LIKE cl  WHERE cl.COURSE_ID = c.ID) AS `LIKE`,
-            (select count(*) from COURSE_REPLY cr WHERE cr.COURSE_ID = c.ID) AS `REPLY_COUNT`
+            (select count(*) from COURSE_REPLY cr WHERE cr.COURSE_ID = c.ID) AS `REPLY_COUNT`,
+            (select count(*) from COURSE_REPORT cr WHERE cr.COURSE_ID = c.ID) AS `REPORT_COUNT`
         FROM COURSE c, USER u, COURSE_LIKE cl
         WHERE c.USER_ID = u.ID AND cl.course_id = c.id AND cl.user_id = #{userId}
     </select>
@@ -159,7 +163,8 @@
                 u.NICKNAME,
                 c.DESCRIPTION,
                 (select count(*) from COURSE_LIKE cl  WHERE cl.COURSE_ID = c.ID) AS `LIKE`,
-                (select count(*) from COURSE_REPLY cr WHERE cr.COURSE_ID = c.ID) AS `REPLY_COUNT`
+                (select count(*) from COURSE_REPLY cr WHERE cr.COURSE_ID = c.ID) AS `REPLY_COUNT`,
+                (select count(*) from COURSE_REPORT cr WHERE cr.COURSE_ID = c.ID) AS `REPORT_COUNT`
         FROM COURSE c, USER u
         WHERE c.USER_ID = u.ID AND u.ID = #{userId}
     </select>
@@ -186,7 +191,8 @@
             u.NICKNAME,
             (6371*acos(cos(radians(#{lat}))*cos(radians(p.LAT))*cos(radians(p.LNG)-radians(#{lng}))+sin(radians(#{lat}))*sin(radians(p.LAT)))) AS `DIST`,
             (select count(*) from COURSE_LIKE cl  WHERE cl.COURSE_ID = c.ID) AS `LIKE`,
-            (select count(*) from COURSE_REPLY cr WHERE cr.COURSE_ID = c.ID) AS `REPLY_COUNT`
+            (select count(*) from COURSE_REPLY cr WHERE cr.COURSE_ID = c.ID) AS `REPLY_COUNT`,
+            (select count(*) from COURSE_REPORT cr WHERE cr.COURSE_ID = c.ID) AS `REPORT_COUNT`
         FROM COURSE c, COMPOSE cp, PLACE p, USER u
         WHERE   cp.COURSE_ID = c.ID
         AND     cp.PLACE_ID = p.ID

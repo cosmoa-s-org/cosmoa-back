@@ -14,4 +14,5 @@ public class CourseLocationDTO {
     private int like;
     private int replyCount;
     private String description;
+    private int reportCount;
 }
