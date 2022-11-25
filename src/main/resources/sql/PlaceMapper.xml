@@ -24,6 +24,8 @@
         <result property="like" column="LIKE" />
         <result property="nickname" column="NICKNAME" />
         <result property="replyCount" column="REPLY_COUNT" />
+        <result property="description" column="DESCRIPTION" />
+        <result property="imgPath" column="IMG_PATH"/>
 	</resultMap>
 
     <resultMap type="com.kumoh.cosmoa.dto.response.PlaceDetailResponseDTO" id="PlaceDetailResponseDTO">
@@ -39,6 +41,8 @@
                 p.ID,
                 p.NAME,
                 u.NICKNAME,
+                p.DESCRIPTION,
+                p.IMG_PATH,
                 (select count(*) from PLACE_LIKE pl  WHERE pl.PLACE_ID = p.ID) AS `LIKE`,
                 (select count(*) from PLACE_REPLY pr WHERE pr.PLACE_ID = p.ID) AS `REPLY_COUNT`
         FROM PLACE p, USER u, PLACE_LIKE pl
@@ -51,6 +55,8 @@
                 p.ID,
                 p.NAME,
                 u.NICKNAME,
+                p.DESCRIPTION,
+                p.IMG_PATH,
                 (select count(*) from PLACE_LIKE pl  WHERE pl.PLACE_ID = p.ID) AS `LIKE`,
                 (select count(*) from PLACE_REPLY pr WHERE pr.PLACE_ID = p.ID) AS `REPLY_COUNT`
         FROM PLACE p, USER u

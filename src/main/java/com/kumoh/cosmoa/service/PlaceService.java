@@ -47,12 +47,20 @@ public class PlaceService {
     
     public List<PlaceTableResponseDTO> findScrapedPlaceResponseList(int userId) {
     	List<PlaceTableResponseDTO> dtos = placeMapper.getScrapedPlaceResponseList(userId);
+    	for(int i = 0; i < dtos.size(); i++)
+    	{
+    		dtos.get(i).loadImage();
+    	}
     	
     	return dtos;
     }
     
     public List<PlaceTableResponseDTO> findPostedPlaceResponseList(int userId) {
     	List<PlaceTableResponseDTO> dtos = placeMapper.getPostedPlaceResponseList(userId);
+    	for(int i = 0; i < dtos.size(); i++)
+    	{
+    		dtos.get(i).loadImage();
+    	}
     	
     	return dtos;
     }
